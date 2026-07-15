@@ -11,6 +11,39 @@ export interface YearCargos {
 
 export const cargos: YearCargos[] = [
   {
+    year: 2027,
+    members: [
+      { role: "Fallera Major", name: "Yaiza Martinez", image: "https://picsum.photos/seed/cargo2024fm/300/300" },
+      { role: "Fallera Major Infantil", name: "Maria Serrano Carrascosa", image: "https://picsum.photos/seed/cargo2024fmi/300/300" },
+      { role: "President", name: "Francisco Serrano", image: "https://picsum.photos/seed/cargo2024p/300/300" },
+      { role: "President Infantil", name: "Marc Mingarro Fortea", image: "https://picsum.photos/seed/cargo2024pi/300/300" },
+      { role: "Secretària", name: "Marta Cano Ferrer", image: "https://picsum.photos/seed/cargo2024s/300/300" },
+      { role: "Tresorer", name: "Pau Górriz Llopis", image: "https://picsum.photos/seed/cargo2024t/300/300" }
+    ]
+  },
+  {
+    year: 2026,
+    members: [
+      { role: "Fallera Major", name: "Laura Pérez Nadal", image: "https://picsum.photos/seed/cargo2024fm/300/300" },
+      { role: "Fallera Major Infantil", name: "Sofia Martí Roig", image: "https://picsum.photos/seed/cargo2024fmi/300/300" },
+      { role: "President", name: "Vicent Molina Serra", image: "https://picsum.photos/seed/cargo2024p/300/300" },
+      { role: "President Infantil", name: "Adrià López Ferrer", image: "https://picsum.photos/seed/cargo2024pi/300/300" },
+      { role: "Secretària", name: "Marta Cano Ferrer", image: "https://picsum.photos/seed/cargo2024s/300/300" },
+      { role: "Tresorer", name: "Pau Górriz Llopis", image: "https://picsum.photos/seed/cargo2024t/300/300" }
+    ]
+  },
+  {
+    year: 2025,
+    members: [
+      { role: "Fallera Major", name: "Laura Pérez Nadal", image: "https://picsum.photos/seed/cargo2024fm/300/300" },
+      { role: "Fallera Major Infantil", name: "Sofia Martí Roig", image: "https://picsum.photos/seed/cargo2024fmi/300/300" },
+      { role: "President", name: "Vicent Molina Serra", image: "https://picsum.photos/seed/cargo2024p/300/300" },
+      { role: "President Infantil", name: "Adrià López Ferrer", image: "https://picsum.photos/seed/cargo2024pi/300/300" },
+      { role: "Secretària", name: "Marta Cano Ferrer", image: "https://picsum.photos/seed/cargo2024s/300/300" },
+      { role: "Tresorer", name: "Pau Górriz Llopis", image: "https://picsum.photos/seed/cargo2024t/300/300" }
+    ]
+  },
+  {
     year: 2024,
     members: [
       { role: "Fallera Major", name: "Laura Pérez Nadal", image: "https://picsum.photos/seed/cargo2024fm/300/300" },

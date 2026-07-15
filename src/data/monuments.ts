@@ -18,6 +18,57 @@ export interface Monument {
 
 export const monuments: Monument[] = [
   {
+    year: 2027,
+    gran: {
+      title: "El temps perdut",
+      artist: "Pere Garcia Villanueva",
+      award: "1er Premio Secció Especial",
+      description: "Una reflexió sobre la memòria col·lectiva i el pas del temps.",
+      image: "https://picsum.photos/seed/falla2024g/600/400"
+    },
+    infantil: {
+      title: "Colors del món",
+      artist: "Maria López Ferrer",
+      award: "1er Premio Secció 1a",
+      description: "Un viatge pels colors de la diversitat cultural.",
+      image: "https://picsum.photos/seed/falla2024i/600/400"
+    }
+  },
+  {
+    year: 2026,
+    gran: {
+      title: "El temps perdut",
+      artist: "Pere Garcia Villanueva",
+      award: "1er Premio Secció Especial",
+      description: "Una reflexió sobre la memòria col·lectiva i el pas del temps.",
+      image: "https://picsum.photos/seed/falla2024g/600/400"
+    },
+    infantil: {
+      title: "Colors del món",
+      artist: "Maria López Ferrer",
+      award: "1er Premio Secció 1a",
+      description: "Un viatge pels colors de la diversitat cultural.",
+      image: "https://picsum.photos/seed/falla2024i/600/400"
+    }
+  },
+  {
+    year: 2025,
+    gran: {
+      title: "El temps perdut",
+      artist: "Pere Garcia Villanueva",
+      award: "1er Premio Secció Especial",
+      description: "Una reflexió sobre la memòria col·lectiva i el pas del temps.",
+      image: "https://picsum.photos/seed/falla2024g/600/400"
+    },
+    infantil: {
+      title: "Colors del món",
+      artist: "Maria López Ferrer",
+      award: "1er Premio Secció 1a",
+      description: "Un viatge pels colors de la diversitat cultural.",
+      image: "https://picsum.photos/seed/falla2024i/600/400"
+    }
+  },
+  {
     year: 2024,
     gran: {
       title: "El temps perdut",

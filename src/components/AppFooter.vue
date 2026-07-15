@@ -15,22 +15,19 @@ const currentYear = new Date().getFullYear()
 
         <div class="col-12 col-md-4 text-center q-pb-md q-md-pb-none">
           <div class="row justify-center q-gutter-md">
-            <q-btn round flat color="primary" icon="fab fa-instagram" size="md" href="https://instagram.com" target="_blank">
+            <q-btn round flat color="primary" icon="fab fa-instagram" size="md" href="https://instagram.com/fallasantspatronsalzira" target="_blank">
               <q-tooltip>Instagram</q-tooltip>
             </q-btn>
-            <q-btn round flat color="primary" icon="fab fa-facebook-f" size="md" href="https://facebook.com" target="_blank">
+            <q-btn round flat color="primary" icon="fab fa-facebook-f" size="md" href="https://facebook.com/fallasantspatrons" target="_blank">
               <q-tooltip>Facebook</q-tooltip>
-            </q-btn>
-            <q-btn round flat color="primary" icon="fab fa-twitter" size="md" href="https://twitter.com" target="_blank">
-              <q-tooltip>Twitter</q-tooltip>
             </q-btn>
           </div>
         </div>
 
         <div class="col-12 col-md-4 text-center text-md-right">
-          <div class="text-grey-4 text-body2">Carrer Major, 123</div>
+          <div class="text-grey-4 text-body2">Carrer Taronger, 23</div>
           <div class="text-grey-4 text-body2">46600 Alzira, València</div>
-          <div class="text-grey-4 text-body2">info@santspatrons.com</div>
+          <div class="text-grey-4 text-body2">tresoreria@santspatrons.com</div>
         </div>
       </div>
     </div>
@@ -39,7 +36,7 @@ const currentYear = new Date().getFullYear()
 
     <div class="q-pb-md text-center">
       <div class="text-grey text-caption">
-        {{ currentYear }} © Falla Sants Patrons — Junta Local Fallera d'Alzira</div>
+        {{ currentYear }} © Falla Sants Patrons</div>
 
       <div class="text-grey text-caption q-mt-xs">
         <router-link to="/contacto" class="text-primary">Contacte</router-link>

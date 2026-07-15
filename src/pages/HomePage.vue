@@ -6,9 +6,8 @@ import { cargos } from '@/data/cargos'
 
 const featuredYear = computed(() => monuments[0])
 const currentYearCargos = computed(() => {
-  const current = cargos.find(c => c.year === 2024)
+  const current = cargos.find(c => c.year === 2027)
   if (!current) return []
-  // Get the 4 main roles: President, Fallera Major, Fallera Major Infantil, President Infantil
   const mainRoles = ['President', 'Fallera Major', 'President Infantil', 'Fallera Major Infantil']
   return current.members.filter(m => mainRoles.includes(m.role))
 })
@@ -17,7 +16,7 @@ const quickLinks = [
   { title: 'Monuments', desc: 'Les nostres falles', icon: 'architecture', to: '/monumentos', color: 'accent' },
   { title: 'Càrrecs', desc: 'La nostra família fallera', icon: 'groups', to: '/cargos', color: 'secondary' },
   { title: 'Esdeveniments', desc: 'El calendari festiu', icon: 'event', to: '/eventos', color: 'info' },
-  { title: 'Galeria', desc: 'Moments inolvidables', icon: 'photo_library', to: '/galeria', color: 'positive' },
+  { title: 'Galeria', desc: 'Moments inoblidables', icon: 'photo_library', to: '/galeria', color: 'positive' },
   { title: 'Contacte', desc: 'Uneix-te a nosaltres', icon: 'mail', to: '/contacto', color: 'warning' }
 ]
 
@@ -171,16 +170,16 @@ const scrollToContent = () => {
                 <div class="text-subtitle1">Anys d'història</div>
               </div>
               <div class="col-6 col-md-3">
-                <div class="text-h2 text-primary text-weight-bold">100+</div>
-                <div class="text-subtitle1">Socis</div>
+                <div class="text-h2 text-primary text-weight-bold">450+</div>
+                <div class="text-subtitle1">Membres</div>
               </div>
               <div class="col-6 col-md-3">
                 <div class="text-h2 text-primary text-weight-bold">15</div>
-                <div class="text-subtitle1">Premis majors</div>
+                <div class="text-subtitle1">Primers premis</div>
               </div>
               <div class="col-6 col-md-3">
-                <div class="text-h2 text-primary text-weight-bold">2024</div>
-                <div class="text-subtitle1">Aniversari</div>
+                <div class="text-h2 text-primary text-weight-bold">8</div>
+                <div class="text-subtitle1">Primers premis en especial</div>
               </div>
             </div>
           </q-card-section>
@@ -193,7 +192,7 @@ const scrollToContent = () => {
           Vols formar part de la nostra família fallera?
         </div>
         <div class="text-body1 text-grey-8 q-mb-lg" style="max-width: 600px; margin: 0 auto;">
-          Uneix-te a la Falla Sants Patrons d'Alzira i viu de prop la tradició valenciana més emblemàtica.
+          Uneix-te a la Falla Sants Patrons i viu de prop la millor experiència fallera.
         </div>
         <q-btn
           color="primary"

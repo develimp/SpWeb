@@ -36,7 +36,7 @@ const filteredMonuments = computed(() => {
       <div class="container text-center">
         <div class="text-h3 text-primary text-weight-bold q-mb-md">Monuments Fallers</div>
         <div class="text-h5 text-grey-8 q-mb-sm">La nostra tradició artística</div>
-        <div class="text-subtitle1 text-grey-7">Monuments Gran i Infantil des de 2015</div>
+        <div class="text-subtitle1 text-grey-7">Monuments grans i infantils des de 1966</div>
       </div>
     </section>
 

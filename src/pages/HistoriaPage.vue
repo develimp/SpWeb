@@ -22,7 +22,7 @@ const scrollToDecade = (decade: string) => {
       <div class="container text-center">
         <div class="text-h3 text-primary text-weight-bold q-mb-md">La nostra història</div>
         <div class="text-h5 text-grey-8 q-mb-sm">Més de 60 anys de festa, foc i tradició</div>
-        <div class="text-subtitle1 text-grey-7">Fundada el 1964 a Alzira, València</div>
+        <div class="text-subtitle1 text-grey-7">Fundada el 20 de març de 1965</div>
       </div>
     </section>
 

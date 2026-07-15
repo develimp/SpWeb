@@ -10,10 +10,10 @@ export interface Decade {
 export const historia: Decade[] = [
   {
     decade: "1960s",
-    years: "1964–1969",
+    years: "1966–1969",
     title: "Els inicis",
-    description: "Fundació de la falla l'any 1964 per un grup de veïns entusiastes del barri. Els primers monuments eren modestos però plens d'il·lusió.",
-    milestone: "Fundació 1964",
+    description: "Fundació de la falla l'any 1965 per un grup de veïns entusiastes del barri. Els primers monuments eren modestos però plens d'il·lusió.",
+    milestone: "Fundació 1965",
     image: "https://picsum.photos/seed/hist1960/600/350"
   },
   {

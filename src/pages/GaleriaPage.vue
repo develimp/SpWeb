@@ -64,7 +64,7 @@ const getCategoryColor = (category: string) => {
     <section class="hero-small text-white q-py-xl">
       <div class="container text-center">
         <div class="text-h3 text-primary text-weight-bold q-mb-md">Galeria</div>
-        <div class="text-h5 text-grey-8 q-mb-sm">Moments inolvidables</div>
+        <div class="text-h5 text-grey-8 q-mb-sm">Moments inoblidables</div>
         <div class="text-subtitle1 text-grey-7">60 anys d'història en imatges</div>
       </div>
     </section>
