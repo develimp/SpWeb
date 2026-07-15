@@ -1,0 +1,46 @@
+{
+  "name": "falla-sants-patrons-alzira",
+  "version": "0.0.1",
+  "description": "Lloc web de la Falla Sants Patrons d'Alzira",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.12.0",
+  "scripts": {
+    "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
+    "format": "prettier --write \"**/*.{ts,js,vue,html,md,json}\" --ignore-path .gitignore",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "preview": "quasar preview"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.13",
+    "quasar": "^2.17.4",
+    "vue": "^3.5.13",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "@quasar/app-vite": "^2.0.1",
+    "@types/node": "^22.10.2",
+    "@vue/eslint-config-prettier": "^10.1.0",
+    "@vue/eslint-config-typescript": "^14.1.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.14.0",
+    "eslint-plugin-vue": "^9.30.0",
+    "globals": "^15.12.0",
+    "postcss": "^8.4.49",
+    "prettier": "^3.3.3",
+    "sass": "^1.81.0",
+    "typescript": "^5.6.3",
+    "vite-plugin-checker": "^0.8.0",
+    "vue-tsc": "^2.1.10"
+  },
+  "engines": {
+    "node": "^24 || ^22 || ^20 || ^18"
+  },
+  "pnpm": {
+    "overrides": {
+      "sass-embedded": "npm:sass@1.81.0"
+    }
+  }
+}
