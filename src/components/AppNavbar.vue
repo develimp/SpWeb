@@ -40,7 +40,6 @@ onUnmounted(() => {
       <q-toolbar-title>
         <router-link to="/" class="text-decoration-none">
           <span class="text-weight-bold text-body1 text-md-h6">Falla Sants Patrons</span>
-          <span class="text-weight-light q-ml-sm text-grey-4 hidden-xs">· Alzira</span>
         </router-link>
       </q-toolbar-title>
 

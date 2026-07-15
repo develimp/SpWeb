@@ -112,7 +112,7 @@ function getCategoryColor(category: string): string {
           <q-select
             v-model="selectedCategory"
             :options="categories"
-            label="Filtra per tipus"
+            label="Filtra per categoria"
             outlined
             dense
             clearable

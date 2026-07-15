@@ -26,14 +26,14 @@ onMounted(() => {
           <h1 class="hero-title">
             Falla Sants Patrons
           </h1>
-          <div class="hero-subtitle">Alzira · València</div>
+          <div class="hero-subtitle">Alzira</div>
           <div class="hero-tagline">
             Més de 60 anys de festa, foc i tradició
           </div>
           <div class="hero-year-badge">
             <q-badge color="white" text-color="primary" class="q-pa-sm text-subtitle1">
               <q-icon name="whatshot" class="q-mr-xs" />
-              Des de 1964
+              Des del 20 de març de 1965
             </q-badge>
           </div>
 

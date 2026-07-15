@@ -12,11 +12,10 @@ const form = ref({
 })
 
 const contactInfo = {
-  address: 'Carrer Major, 123',
+  address: 'Carrer Taronger, 23',
   city: '46600 Alzira, València',
-  email: 'info@santspatrons.com',
-  phone: '+34 962 412 345',
-  instagram: 'https://instagram.com/fallasantspatrons',
+  email: 'tresoreria@santspatrons.com',
+  instagram: 'https://instagram.com/fallasantspatronsalzira',
   facebook: 'https://facebook.com/fallasantspatrons'
 }
 
@@ -150,15 +149,6 @@ const onSubmit = () => {
                   </a>
                 </div>
               </div>
-
-              <div class="row items-center">
-                <q-icon name="phone" color="primary" size="24px" class="q-mr-md" />
-                <div>
-                  <a :href="`tel:${contactInfo.phone}`" class="text-body2 text-primary">
-                    {{ contactInfo.phone }}
-                  </a>
-                </div>
-              </div>
             </div>
 
             <q-separator class="q-my-lg" />
@@ -187,7 +177,7 @@ const onSubmit = () => {
 
           <q-card flat bordered>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3070.7115905345485!2d-0.4356876845959!3d39.15173497940371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd61e9c2b4a4e2f1%3A0x4a1a4c1a4a1a4a1a!2sAlzira%2C%20Valencia!5e0!3m2!1sen!2ses!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3094.2705497746174!2d-0.4385806251343398!3d39.14582767167205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd61baa381c3c8f5%3A0x476ef5dc0af1990d!2sCarrer%20del%20Taronger%2C%2023%2C%2046600%20Alzira%2C%20Val%C3%A8ncia!5e0!3m2!1sca!2ses!4v1784147992926!5m2!1sca!2ses"
               width="100%"
               height="300"
               style="border:0; border-radius: 8px;"
