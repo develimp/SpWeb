@@ -20,14 +20,14 @@ defineProps<{
         :src="decade.image"
         :ratio="16/9"
         class="rounded-borders"
-        style="max-height: 220px;"
+        style="max-height: 600px;"
       >
         <div class="absolute-bottom-right bg-primary text-white q-pa-sm">
           {{ decade.milestone }}
         </div>
       </q-img>
 
-      <p class="text-body1">
+      <p class="text-body1" style="white-space: pre-line;">
         {{ decade.description }}
       </p>
     </div>
