@@ -20,222 +20,222 @@ export const monuments: Monument[] = [
   {
     year: 2027,
     gran: {
-      title: "El temps perdut",
-      artist: "Pere Garcia Villanueva",
-      award: "1er Premio Secció Especial",
-      description: "Una reflexió sobre la memòria col·lectiva i el pas del temps.",
-      image: "https://picsum.photos/seed/falla2024g/600/400"
+      title: "",
+      artist: "Creaciones Devis",
+      award: "Secció Primera",
+      description: "",
+      image: "/no-photo.svg"
     },
     infantil: {
-      title: "Colors del món",
-      artist: "Maria López Ferrer",
-      award: "1er Premio Secció 1a",
-      description: "Un viatge pels colors de la diversitat cultural.",
-      image: "https://picsum.photos/seed/falla2024i/600/400"
+      title: "",
+      artist: "Rojas Taibo",
+      award: "Secció Especial",
+      description: "",
+      image: "/no-photo.svg"
     }
   },
   {
     year: 2026,
     gran: {
-      title: "El temps perdut",
-      artist: "Pere Garcia Villanueva",
-      award: "1er Premio Secció Especial",
-      description: "Una reflexió sobre la memòria col·lectiva i el pas del temps.",
-      image: "https://picsum.photos/seed/falla2024g/600/400"
+      title: "Toquem fons ... marí",
+      artist: "Palacio i Serra",
+      award: "1er Premi Secció Primera",
+      description: "",
+      image: "/monuments/gran 2026.webp"
     },
     infantil: {
-      title: "Colors del món",
-      artist: "Maria López Ferrer",
-      award: "1er Premio Secció 1a",
-      description: "Un viatge pels colors de la diversitat cultural.",
-      image: "https://picsum.photos/seed/falla2024i/600/400"
+      title: "Terra Viva",
+      artist: "Rojas Taibo",
+      award: "4rt Premi Secció Especial",
+      description: "",
+      image: "/monuments/infantil 2026.webp"
     }
   },
   {
     year: 2025,
     gran: {
-      title: "El temps perdut",
-      artist: "Pere Garcia Villanueva",
-      award: "1er Premio Secció Especial",
-      description: "Una reflexió sobre la memòria col·lectiva i el pas del temps.",
-      image: "https://picsum.photos/seed/falla2024g/600/400"
+      title: "Alzira, capital del pecat",
+      artist: "Palacio i Serra",
+      award: "1er Premi Secció Primera",
+      description: "",
+      image: "/no-photo.svg"
     },
     infantil: {
-      title: "Colors del món",
-      artist: "Maria López Ferrer",
-      award: "1er Premio Secció 1a",
-      description: "Un viatge pels colors de la diversitat cultural.",
-      image: "https://picsum.photos/seed/falla2024i/600/400"
+      title: "Ritmelandia",
+      artist: "Rojas Taibo",
+      award: "3er Premi Secció Especial",
+      description: "",
+      image: "/no-photo.svg"
     }
   },
   {
     year: 2024,
     gran: {
-      title: "El temps perdut",
-      artist: "Pere Garcia Villanueva",
-      award: "1er Premio Secció Especial",
-      description: "Una reflexió sobre la memòria col·lectiva i el pas del temps.",
-      image: "https://picsum.photos/seed/falla2024g/600/400"
+      title: "Salem",
+      artist: "Germans Parra",
+      award: "1er Premi Secció Primera",
+      description: "",
+      image: "/monuments/gran 2024.webp"
     },
     infantil: {
-      title: "Colors del món",
-      artist: "Maria López Ferrer",
-      award: "1er Premio Secció 1a",
-      description: "Un viatge pels colors de la diversitat cultural.",
-      image: "https://picsum.photos/seed/falla2024i/600/400"
+      title: "Quin és el teu talent?",
+      artist: "Gonzalo Rojas",
+      award: "3er Premi Secció Especial",
+      description: "",
+      image: "/monuments/infantil 2024.webp"
     }
   },
   {
     year: 2023,
     gran: {
-      title: "Arrels",
-      artist: "Josep Martínez Alós",
-      award: "2n Premio Secció Especial",
-      description: "Homenatge a les tradicions i les arrels valencianes.",
-      image: "https://picsum.photos/seed/falla2023g/600/400"
+      title: "Vintage",
+      artist: "Germans Parra",
+      award: "1er Premi Secció Primera",
+      description: "",
+      image: "/monuments/gran 2023.webp"
     },
     infantil: {
-      title: "El bosc encantat",
-      artist: "Ana Soler Comes",
-      award: "1er Premio Secció 1a",
-      description: "Una aventura màgica pel bosc dels animals.",
-      image: "https://picsum.photos/seed/falla2023i/600/400"
+      title: "Amb tota l'energia",
+      artist: "Gonzalo Rojas",
+      award: "1er Premi Secció Especial",
+      description: "",
+      image: "/monuments/infantil 2023.webp"
     }
   },
   {
     year: 2022,
     gran: {
-      title: "Renaixement",
-      artist: "Pere Garcia Villanueva",
-      award: "1er Premio Secció Especial",
-      description: "El renaixement de la festa després dels anys difícils.",
-      image: "https://picsum.photos/seed/falla2022g/600/400"
+      title: "Les meravelles d'Oz",
+      artist: "Germans Parra",
+      award: "1er Premi Secció Primera",
+      description: "",
+      image: "/monuments/gran 2022.webp"
     },
     infantil: {
-      title: "Somnis d'estiu",
-      artist: "Carles Vidal Pons",
-      award: "3r Premio Secció 1a",
-      description: "Els somnis i les il·lusions de la infància en estiu.",
-      image: "https://picsum.photos/seed/falla2022i/600/400"
+      title: "Lluminària",
+      artist: "Borja Lorente",
+      award: "2on Premi Secció Especial",
+      description: "",
+      image: "/monuments/infantil 2022.webp"
     }
   },
   {
     year: 2021,
     gran: {
-      title: "Esperança",
-      artist: "Josep Martínez Alós",
+      title: "Les meravelles d'Oz",
+      artist: "Germans Parra",
       award: "No celebrada",
       description: "Monument previst però no plantat per la pandèmia.",
-      image: "https://picsum.photos/seed/falla2021g/600/400"
+      image: "/monuments/gran 2022.webp"
     },
     infantil: {
-      title: "Vent de primavera",
-      artist: "Maria López Ferrer",
+      title: "Lluminària",
+      artist: "Borja Lorente",
       award: "No celebrada",
-      description: "Monument infantil previst per a 2021.",
-      image: "https://picsum.photos/seed/falla2021i/600/400"
+      description: "Monument previst però no plantat per la pandèmia.",
+      image: "/monuments/infantil 2022.webp"
     }
   },
   {
     year: 2020,
     gran: {
-      title: "Llibertat",
-      artist: "Pere Garcia Villanueva",
-      award: "2n Premio Secció Especial",
-      description: "Un crit per la llibertat i els drets humans.",
-      image: "https://picsum.photos/seed/falla2020g/600/400"
+      title: "Les meravelles d'Oz",
+      artist: "Germans Parra",
+      award: "No celebrada",
+      description: "Monument previst però no plantat per la pandèmia.",
+      image: "/monuments/gran 2022.webp"
     },
     infantil: {
-      title: "Aventurers",
-      artist: "Ana Soler Comes",
-      award: "2n Premio Secció 1a",
-      description: "Petits aventurers descobrint el món.",
-      image: "https://picsum.photos/seed/falla2020i/600/400"
+      title: "Lluminària",
+      artist: "Borja Lorente",
+      award: "No celebrada",
+      description: "Monument previst però no plantat per la pandèmia.",
+      image: "/monuments/infantil 2022.webp"
     }
   },
   {
     year: 2019,
     gran: {
-      title: "Memòries",
-      artist: "Josep Martínez Alós",
-      award: "3r Premio Secció Especial",
-      description: "Un viatge per les memòries de la nostra falla.",
-      image: "https://picsum.photos/seed/falla2019g/600/400"
+      title: "La ciutat encantada",
+      artist: "Salva Banyuls i Néstor Ruiz",
+      award: "Secció Primera",
+      description: "",
+      image: "/monuments/gran 2019.webp"
     },
     infantil: {
-      title: "El jardí secret",
-      artist: "Carles Vidal Pons",
-      award: "1er Premio Secció 1a",
-      description: "Un jardí ple de sorpreses i misteris.",
-      image: "https://picsum.photos/seed/falla2019i/600/400"
+      title: "Somia",
+      artist: "Borja Lorente Castillo",
+      award: "Secció Especial",
+      description: "",
+      image: "/monuments/infantil 2019.webp"
     }
   },
   {
     year: 2018,
     gran: {
-      title: "Identitat",
-      artist: "Pere Garcia Villanueva",
-      award: "1er Premio Secció Especial",
-      description: "La nostra identitat valenciana i fallera.",
-      image: "https://picsum.photos/seed/falla2018g/600/400"
+      title: "Simfonia",
+      artist: "Àlex Oliver",
+      award: "4t Premi Secció Primera",
+      description: "",
+      image: "/monuments/gran 2018.webp"
     },
     infantil: {
-      title: "Somnis de xiquets",
-      artist: "Maria López Ferrer",
-      award: "2n Premio Secció 1a",
-      description: "Els somnis de la canalla del barri.",
-      image: "https://picsum.photos/seed/falla2018i/600/400"
+      title: "Imaginarium",
+      artist: "Borja Lorente Castillo",
+      award: "2n Premi Secció Especial",
+      description: "",
+      image: "/monuments/infantil 2018.webp"
     }
   },
   {
     year: 2017,
     gran: {
-      title: "Tradició i modernitat",
-      artist: "Josep Martínez Alós",
-      award: "2n Premio Secció Especial",
-      description: "La fusió entre tradició i món modern.",
-      image: "https://picsum.photos/seed/falla2017g/600/400"
+      title: "Yucatán",
+      artist: "Germans Parra",
+      award: "1er Premi Secció Primera",
+      description: "",
+      image: "/monuments/gran 2017.webp"
     },
     infantil: {
-      title: "El conte màgic",
-      artist: "Ana Soler Comes",
-      award: "1er Premio Secció 1a",
-      description: "Un conte ple de màgia i fantasia.",
-      image: "https://picsum.photos/seed/falla2017i/600/400"
+      title: "Musicalíssim",
+      artist: "Carmen Camacho",
+      award: "2on Premi Secció Primera",
+      description: "",
+      image: "/monuments/infantil 2017.webp"
     }
   },
   {
     year: 2016,
     gran: {
-      title: "València terra nostra",
-      artist: "Pere Garcia Villanueva",
-      award: "3r Premio Secció Especial",
-      description: "Homenatge a la terra valenciana i els seus productes.",
-      image: "https://picsum.photos/seed/falla2016g/600/400"
+      title: "Psicologia fallera",
+      artist: "Toni Pérez",
+      award: "2on Premi Secció Primera",
+      description: "",
+      image: "/monuments/gran 2016.webp"
     },
     infantil: {
-      title: "El mar blau",
-      artist: "Carles Vidal Pons",
-      award: "2n Premio Secció 1a",
-      description: "Una aventura pel mar Mediterrani.",
-      image: "https://picsum.photos/seed/falla2016i/600/400"
+      title: "El món al revés",
+      artist: "Carmen Camacho",
+      award: "1er Premi Secció Primera",
+      description: "",
+      image: "/monuments/infantil 2016.webp"
     }
   },
   {
     year: 2015,
     gran: {
-      title: "Solidaritat",
-      artist: "Josep Martínez Alós",
-      award: "1er Premio Secció Especial",
-      description: "El valor de la solidaritat i l'ajuda mútua.",
-      image: "https://picsum.photos/seed/falla2015g/600/400"
+      title: "L'amor, el desamor ...",
+      artist: "Toni Pérez",
+      award: "3er Premi Secció Primera",
+      description: "",
+      image: "/monuments/gran 2015.webp"
     },
     infantil: {
-      title: "Animals del bosc",
-      artist: "Maria López Ferrer",
-      award: "1er Premio Secció 1a",
-      description: "Els animals del bosc i les seues aventures.",
-      image: "https://picsum.photos/seed/falla2015i/600/400"
+      title: "Preparant l'aniversari",
+      artist: "José Gallego",
+      award: "1er Premi Secció Primera",
+      description: "",
+      image: "/monuments/infantil 2015.webp"
     }
   }
 ]

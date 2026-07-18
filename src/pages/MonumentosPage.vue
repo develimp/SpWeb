@@ -28,6 +28,15 @@ const filteredMonuments = computed(() => {
 
   return result
 })
+
+const firstPrizeCount = computed(() =>
+  filteredMonuments.value.reduce((count, monument) => {
+    const grandAward = monument.gran.award.includes('1er')
+    const infantilAward = monument.infantil.award.includes('1er')
+
+    return count + (grandAward ? 1 : 0) + (infantilAward ? 1 : 0)
+  }, 0)
+)
 </script>
 
 <template>
@@ -84,7 +93,7 @@ const filteredMonuments = computed(() => {
             <div class="row items-center">
               <q-avatar color="primary" text-color="white" icon="architecture" size="48px" class="q-mr-md" />
               <div>
-                <div class="text-h4 text-weight-bold text-secondary">{{ filteredMonuments.length }}</div>
+                <div class="text-h4 text-weight-bold text-secondary">{{ filteredMonuments.length * 2}}</div>
                 <div class="text-body2 text-grey-7">monuments trobats</div>
               </div>
             </div>
@@ -96,7 +105,7 @@ const filteredMonuments = computed(() => {
               <q-icon name="emoji_events" color="accent" size="48px" class="q-mr-md" />
               <div>
                 <div class="text-h4 text-weight-bold text-secondary">
-                  {{ filteredMonuments.filter(m => m.gran.award.includes('1er') || m.infantil.award.includes('1er')).length }}
+                  {{ firstPrizeCount }}
                 </div>
                 <div class="text-body2 text-grey-7">primers premis</div>
               </div>

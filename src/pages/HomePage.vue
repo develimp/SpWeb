@@ -25,6 +25,8 @@ const scrollRef = ref<HTMLElement | null>(null)
 const scrollToContent = () => {
   scrollRef.value?.scrollIntoView({ behavior: 'smooth' })
 }
+
+const hasNoPhoto = (image: string) => image === '/no-photo.svg'
 </script>
 
 <template>
@@ -76,7 +78,12 @@ const scrollToContent = () => {
               <div class="col-12 col-md-6">
                 <q-card flat bordered class="featured-monument full-height">
                   <q-img :src="featuredYear.gran.image" :ratio="16/9">
-                    <div class="absolute-bottom bg-secondary">
+                    <div v-if="hasNoPhoto(featuredYear.gran.image)" class="absolute-full flex flex-center column text-center bg-grey-2 text-grey-7">
+                      <q-icon name="image_not_supported" size="48px" class="q-mb-sm" />
+                      <div class="text-subtitle1 text-weight-bold">Pròximament</div>
+                      <div class="text-caption">Foto disponible en breu</div>
+                    </div>
+                    <div v-else class="absolute-bottom bg-secondary">
                       <div class="text-subtitle1 text-weight-bold">Monument Gran</div>
                       <div class="text-h5 text-primary q-mt-xs">{{ featuredYear.gran.title }}</div>
                     </div>
@@ -100,7 +107,12 @@ const scrollToContent = () => {
               <div class="col-12 col-md-6">
                 <q-card flat bordered class="featured-monument full-height">
                   <q-img :src="featuredYear.infantil.image" :ratio="16/9">
-                    <div class="absolute-bottom bg-secondary">
+                    <div v-if="hasNoPhoto(featuredYear.infantil.image)" class="absolute-full flex flex-center column text-center bg-grey-2 text-grey-7">
+                      <q-icon name="image_not_supported" size="48px" class="q-mb-sm" />
+                      <div class="text-subtitle1 text-weight-bold">Pròximament</div>
+                      <div class="text-caption">Foto disponible en breu</div>
+                    </div>
+                    <div v-else class="absolute-bottom bg-secondary">
                       <div class="text-subtitle1 text-weight-bold">Monument Infantil</div>
                       <div class="text-h5 text-primary q-mt-xs">{{ featuredYear.infantil.title }}</div>
                     </div>
