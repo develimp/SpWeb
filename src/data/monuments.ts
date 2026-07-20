@@ -28,7 +28,7 @@ export const monuments: Monument[] = [
     },
     infantil: {
       title: "",
-      artist: "Rojas Taibo",
+      artist: "Gonzalo Rojas i Mercedes Taibo",
       award: "Secció Especial",
       description: "",
       image: "/no-photo.svg"
@@ -45,7 +45,7 @@ export const monuments: Monument[] = [
     },
     infantil: {
       title: "Terra Viva",
-      artist: "Rojas Taibo",
+      artist: "Gonzalo Rojas i Mercedes Taibo",
       award: "4rt Premi Secció Especial",
       description: "",
       image: "/monuments/infantil 2026.webp"
@@ -58,14 +58,14 @@ export const monuments: Monument[] = [
       artist: "Palacio i Serra",
       award: "1er Premi Secció Primera",
       description: "",
-      image: "/no-photo.svg"
+      image: "/monuments/gran 2025.webp"
     },
     infantil: {
       title: "Ritmelandia",
-      artist: "Rojas Taibo",
+      artist: "Gonzalo Rojas i Mercedes Taibo",
       award: "3er Premi Secció Especial",
       description: "",
-      image: "/no-photo.svg"
+      image: "/monuments/infantil 2025.webp"
     }
   },
   {
