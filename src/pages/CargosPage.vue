@@ -53,9 +53,9 @@ const latestYear = computed(() => cargos[0].year)
   <q-page>
     <section class="hero-small text-white q-py-xl">
       <div class="container text-center">
-        <div class="text-h3 text-primary text-weight-bold q-mb-md">Càrrecs Fallers</div>
+        <div class="text-h3 text-primary text-weight-bold q-mb-md">Els Càrrecs</div>
         <div class="text-h5 text-grey-8 q-mb-sm">La nostra família fallera</div>
-        <div class="text-subtitle1 text-grey-7">La Junta Directiva de cada any</div>
+        <div class="text-subtitle1 text-grey-7">Els màxims representants de cada exercici</div>
       </div>
     </section>
 
@@ -64,7 +64,7 @@ const latestYear = computed(() => cargos[0].year)
       <section class="q-mb-xl">
         <div class="text-h5 text-weight-bold text-secondary q-mb-md">
           <q-icon name="stars" color="primary" class="q-mr-sm" />
-          Any actual {{ latestYear }}
+          Exercici actual {{ latestYear }}
         </div>
 
         <CargoCard :year-cargos="cargos[0]" :is-latest="true" />
@@ -73,7 +73,7 @@ const latestYear = computed(() => cargos[0].year)
       <!-- Filters -->
       <q-separator class="q-my-lg" />
       <div class="text-h5 text-weight-bold text-secondary q-mb-md">
-        Anys anteriors
+        Exercicis anteriors
       </div>
 
       <div class="row q-col-gutter-md q-mb-lg">

@@ -7,41 +7,8 @@ defineProps<{
   isLatest?: boolean
 }>()
 
-const roleColors: Record<string, string> = {
-  'Fallera Major': 'primary',
-  'Fallera Major Infantil': 'accent',
-  'President': 'secondary',
-  'Secretària': 'info',
-  'Secretari': 'info',
-  'Tresorer': 'warning',
-  'Tresorera': 'warning',
-  'Capdavanter': 'positive',
-  'Capdavantera': 'positive'
-}
-
-const roleIcons: Record<string, string> = {
-  'Fallera Major': 'diamond',
-  'Fallera Major Infantil': 'favorite',
-  'President': 'check_circle',
-  'President Infantil': 'check_circle',
-  'Secretària': 'description',
-  'Secretari': 'description',
-  'Tresorer': 'account_balance_wallet',
-  'Tresorera': 'account_balance_wallet',
-  'Capdavanter': 'people',
-  'Capdavantera': 'people'
-}
-
 const selectedMember = ref<CargoMember | null>(null)
 const dialogOpen = ref(false)
-
-function getRoleColor(role: string): string {
-  return roleColors[role] || 'grey'
-}
-
-function getRoleIcon(role: string): string {
-  return roleIcons[role] || 'person'
-}
 
 function openPhoto(member: CargoMember) {
   selectedMember.value = member
@@ -70,14 +37,7 @@ function openPhoto(member: CargoMember) {
         @click="openPhoto(member)"
       >
         <q-avatar size="56px" class="q-mr-md">
-          <img :src="member.image" :alt="member.name">
-          <q-badge
-            :color="getRoleColor(member.role)"
-            floating
-            rounded
-          >
-            <q-icon :name="getRoleIcon(member.role)" size="xs" />
-          </q-badge>
+          <img :src="member.image" :alt="member.name" style="object-fit: cover; width: 100%; height: 100%;">
         </q-avatar>
 
         <div class="col">
@@ -93,11 +53,12 @@ function openPhoto(member: CargoMember) {
   </q-card>
 
   <q-dialog v-model="dialogOpen">
-    <q-card style="max-width: 90vw; max-height: 90vh;">
+    <q-card style="width: 75vw; max-width: 800px; max-height: 75vh;">
       <q-img
         v-if="selectedMember"
         :src="selectedMember.image"
         contain
+        style="min-height: 50vh;"
       />
       <q-card-section v-if="selectedMember" class="bg-secondary text-white">
         <div class="text-h6">{{ selectedMember.role }}</div>
