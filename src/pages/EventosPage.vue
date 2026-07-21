@@ -42,15 +42,14 @@ const filteredEvents = computed(() => {
 })
 
 const categoryColors: Record<string, string> = {
-  'Plantà': 'primary',
+  'Nomenament': 'primary',
+  'Presentació': 'primary',
   'Cremà': 'negative',
   'Premi': 'accent',
   'Assemblea': 'positive',
-  'Pirotècnia': 'warning',
   'Cultura': 'cyan',
   'Gastronomia': 'info',
-  'Cavalcada del Ninot': 'deep-orange',
-  'Festa': 'secondary',
+  'Festa': 'warning',
   'Altres': 'grey'
 }
 
@@ -64,7 +63,7 @@ function getCategoryColor(category: string): string {
     <section class="hero-small text-white q-py-xl">
       <div class="container text-center">
         <div class="text-h3 text-primary text-weight-bold q-mb-md">Esdeveniments</div>
-        <div class="text-h5 text-grey-8 q-mb-sm">Calendari de festes {{ new Date().getFullYear() }}</div>
+        <div class="text-h5 text-grey-8 q-mb-sm">Calendari de festes 2027</div>
         <div class="text-subtitle1 text-grey-7">Tots els actes de la temporada fallera</div>
       </div>
     </section>

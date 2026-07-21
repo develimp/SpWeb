@@ -48,9 +48,9 @@ const isAlbumExpanded = (albumId: string) => {
 }
 
 const categoryColors: Record<string, string> = {
-  'Monuments': 'primary',
-  'Càrrecs': 'secondary',
-  'Esdeveniments': 'accent',
+  'Monuments': 'negative',
+  'Actes': 'primary',
+  'Festes': 'warning',
   'Arxiu històric': 'brown'
 }
 
@@ -179,7 +179,9 @@ const getCategoryColor = (category: string) => {
                 />
                 <div>
                   <div class="text-h6 text-weight-bold" :class="`text-${getCategoryColor(album.category)}`">{{ album.category }}</div>
-                  <div class="text-caption text-grey-7">{{ album.year }}</div>
+                  <div class="text-caption text-grey-7">
+                    {{ album.year }}<span v-if="album.description"> · {{ album.description }}</span>
+                  </div>
                 </div>
               </div>
               <div class="text-right">
