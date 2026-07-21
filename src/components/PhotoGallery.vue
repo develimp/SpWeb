@@ -38,6 +38,7 @@ const prevImage = () => {
           :src="image.src"
           :alt="image.title"
           :ratio="4/3"
+          fit="contain"
           class="gallery-image cursor-pointer"
         >
           <div class="gallery-overlay absolute-full flex column justify-end items-start q-pa-md">
@@ -47,8 +48,8 @@ const prevImage = () => {
       </div>
     </div>
 
-    <q-dialog v-model="dialogOpen" maximized>
-      <q-card class="bg-black">
+    <q-dialog v-model="dialogOpen" class="image-dialog">
+      <q-card class="bg-black dialog-card">
         <q-btn
           v-close-popup
           round
@@ -57,7 +58,7 @@ const prevImage = () => {
           class="absolute-top-right q-ma-md z-top"
         />
 
-        <div class="full-height row items-center justify-center">
+        <div class="dialog-content row items-center justify-center">
           <q-btn
             round
             flat
@@ -68,12 +69,12 @@ const prevImage = () => {
             @click="prevImage"
           />
 
-          <div class="flex flex-center" style="flex: 1;">
+          <div class="image-wrapper flex flex-center">
             <q-img
               :src="imageList[selectedImageIndex].src"
               :alt="imageList[selectedImageIndex].title"
               fit="contain"
-              class="full-height"
+              class="modal-image"
             />
           </div>
 
@@ -126,6 +127,7 @@ const prevImage = () => {
 .gallery-image {
   border-radius: 12px;
   overflow: hidden;
+  background: #000;
 }
 
 .gallery-overlay {
@@ -136,5 +138,32 @@ const prevImage = () => {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.image-dialog {
+  .dialog-card {
+    width: min(92vw, 1100px);
+    max-width: 1100px;
+    max-height: 90vh;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+}
+
+.dialog-content {
+  min-height: 70vh;
+  padding: 24px 16px 80px;
+}
+
+.image-wrapper {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
 }
 </style>

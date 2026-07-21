@@ -6,15 +6,14 @@ defineProps<{
 }>()
 
 const categoryColors: Record<string, string> = {
-  'Plantà': 'primary',
-  'Cremà': 'negative',
+  'Nomenament': 'primary',
+  'Presentació': 'primary',
+  'Monument': 'negative',
   'Premi': 'accent',
   'Assemblea': 'positive',
-  'Pirotècnia': 'warning',
   'Cultura': 'cyan',
   'Gastronomia': 'info',
-  'Cavalcada del Ninot': 'deep-orange',
-  'Festa': 'secondary',
+  'Festa': 'warning',
   'Altres': 'grey'
 }
 
@@ -23,15 +22,14 @@ function getCategoryColor(category: string): string {
 }
 
 const categoryIcons: Record<string, string> = {
-  'Plantà': 'construction',
-  'Cremà': 'local_fire_department',
+  'Nomenament': 'star',
+  'Presentació': 'star',
+  'Monument': 'local_fire_department',
   'Premi': 'emoji_events',
   'Assemblea': 'groups',
-  'Pirotècnia': 'celebration',
   'Cultura': 'theater_comedy',
   'Gastronomia': 'restaurant',
-  'Cavalcada del Ninot': 'directions_walk',
-  'Festa': 'music_note',
+  'Festa': 'celebration',
   'Altres': 'event'
 }
 
