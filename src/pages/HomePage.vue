@@ -182,16 +182,16 @@ const hasNoPhoto = (image: string) => image === '/no-photo.svg'
                 <div class="text-subtitle1">Anys d'història</div>
               </div>
               <div class="col-6 col-md-3">
-                <div class="text-h2 text-primary text-weight-bold">450+</div>
+                <div class="text-h2 text-primary text-weight-bold">478</div>
                 <div class="text-subtitle1">Membres</div>
               </div>
               <div class="col-6 col-md-3">
-                <div class="text-h2 text-primary text-weight-bold">15</div>
-                <div class="text-subtitle1">Primers premis</div>
+                <div class="text-h2 text-primary text-weight-bold">391</div>
+                <div class="text-subtitle1">Membres comissió gran</div>
               </div>
               <div class="col-6 col-md-3">
-                <div class="text-h2 text-primary text-weight-bold">8</div>
-                <div class="text-subtitle1">Primers premis en especial</div>
+                <div class="text-h2 text-primary text-weight-bold">87</div>
+                <div class="text-subtitle1">Membres comissió infantil</div>
               </div>
             </div>
           </q-card-section>
@@ -200,7 +200,7 @@ const hasNoPhoto = (image: string) => image === '/no-photo.svg'
 
       <!-- CTA -->
       <section class="text-center q-py-xl">
-        <div class="text-h4 q-mb-md text-weight-bold text-secondary">
+        <div class="text-h4 q-mb-mb text-weight-bold text-secondary">
           Vols formar part de la nostra família fallera?
         </div>
         <div class="text-body1 text-grey-8 q-mb-lg" style="max-width: 600px; margin: 0 auto;">
@@ -213,6 +213,7 @@ const hasNoPhoto = (image: string) => image === '/no-photo.svg'
           to="/contacto"
           size="lg"
           unelevated
+          class="q-mt-md"
         />
       </section>
     </div>
