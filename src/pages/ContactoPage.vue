@@ -19,13 +19,24 @@ const contactInfo = {
   facebook: 'https://facebook.com/fallasantspatrons'
 }
 
+const buildMailtoLink = () => {
+  const subject = encodeURIComponent(`Contacte web: ${form.value.subject || 'Sense assumpte'}`)
+  const body = encodeURIComponent(
+    `Nom: ${form.value.name}\nCorreu: ${form.value.email}\nAssumpte: ${form.value.subject || 'Sense assumpte'}\n\nMissatge:\n${form.value.message}`
+  )
+
+  return `mailto:${contactInfo.email}?subject=${subject}&body=${body}`
+}
+
 const onSubmit = () => {
+  window.location.href = buildMailtoLink()
+
   $q.notify({
     type: 'positive',
-    message: 'Missatge enviat correctament!',
-    caption: 'Et respondrem el més aviat possible.',
-    icon: 'check_circle',
-    timeout: 3000
+    message: 'S’ha obert el teu client de correu.',
+    caption: 'Completa l’enviament des del missatge que s’ha preparat.',
+    icon: 'mail',
+    timeout: 4000
   })
 
   form.value = {
@@ -43,7 +54,7 @@ const onSubmit = () => {
       <div class="container text-center">
         <div class="text-h3 text-primary text-weight-bold q-mb-md">Contacte</div>
         <div class="text-h5 text-grey-8 q-mb-sm">Uneix-te a nosaltres</div>
-        <div class="text-subtitle1 text-grey-7">Volem formar part de la teua família</div>
+        <div class="text-subtitle1 text-grey-7">Volem que formes part de la nostra família fallera</div>
       </div>
     </section>
 
@@ -52,7 +63,7 @@ const onSubmit = () => {
         <!-- Contact Form -->
         <div class="col-12 col-md-6">
           <q-card flat bordered class="q-pa-lg">
-            <div class="text-h5 text-weight-bold text-secondary q-mb-md">
+            <div class="text-h5 text-weight-bold text-secondary q-mb-lg">
               <q-icon name="mail" color="primary" class="q-mr-sm" />
               Envia'ns un missatge
             </div>
@@ -127,7 +138,7 @@ const onSubmit = () => {
         <!-- Info & Map -->
         <div class="col-12 col-md-6">
           <q-card flat bordered class="q-pa-lg q-mb-md">
-            <div class="text-h5 text-weight-bold text-secondary q-mb-md">
+            <div class="text-h5 text-weight-bold text-secondary q-mb-lg">
               <q-icon name="location_on" color="primary" class="q-mr-sm" />
               On som
             </div>
@@ -195,17 +206,9 @@ const onSubmit = () => {
           Vols fer-te soci de la Falla Sants Patrons?
         </div>
         <div class="text-body1 text-grey-8 q-mb-md" style="max-width: 600px; margin: 0 auto;">
-          Uneix-te a una de les falles amb més història d'Alzira. Viviu de prop la tradició
-          valenciana i formaràs part d'una gran família fallera.
+          Uneix-te a una de les falles amb més història d'Alzira, viu de prop la tradició
+          valenciana i forma part d'una gran família fallera.
         </div>
-        <q-btn
-          color="primary"
-          label="Informació per socis"
-          icon="group_add"
-          size="lg"
-          unelevated
-          class="q-mt-md"
-        />
       </section>
     </div>
   </q-page>
@@ -215,6 +218,7 @@ const onSubmit = () => {
 .hero-small {
   background: linear-gradient(135deg, #f5f5f5 0%, #f9f9f9 100%);
   position: relative;
+  overflow: hidden;
   min-height: 300px;
   display: flex;
   align-items: center;

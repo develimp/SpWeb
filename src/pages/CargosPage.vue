@@ -157,6 +157,7 @@ const latestYear = computed(() => cargos[0].year)
 .hero-small {
   background: linear-gradient(135deg, #f5f5f5 0%, #f9f9f9 100%);
   position: relative;
+  overflow: hidden;
   min-height: 300px;
   display: flex;
   align-items: center;
