@@ -1,4 +1,5 @@
 {
+  "extends": "./.quasar/tsconfig.json",
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
@@ -16,6 +17,9 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+
+    /* Silence baseUrl deprecation warning until migrating away from it */
+    "ignoreDeprecations": "6.0",
 
     /* Path aliases — matching Quasar CLI conventions */
     "baseUrl": ".",

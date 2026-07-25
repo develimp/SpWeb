@@ -25,3 +25,7 @@ public
 *.njsproj
 *.sln
 *.sw?
+
+# dotenv environment variables file
+.env.development
+.env.production
