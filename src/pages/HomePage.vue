@@ -1,16 +1,110 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { api } from 'boot/axios'
 import HeroSection from '@/components/HeroSection.vue'
 import { monuments } from '@/data/monuments'
 import { cargos } from '@/data/cargos'
 
-const featuredYear = computed(() => monuments[0])
+const currentYear = ref<number | null>(null)
+const loadingYear = ref(true)
+const yearError = ref<string | null>(null)
+const totalAdultMembers = ref<number | null>(null)
+const loadingAdultMembers = ref(true)
+const adultMembersError = ref<string | null>(null)
+const totalChildishMembers = ref<number | null>(null)
+const loadingChildishMembers = ref(true)
+const childishMembersError = ref<string | null>(null)
+
+const fetchCurrentYear = async () => {
+  loadingYear.value = true
+  yearError.value = null
+  try {
+    const response = await api.get('/falla-years/current')
+    currentYear.value = response.data.code
+  } catch (error) {
+    console.error('Error obtenint l\'exercici actual:', error)
+    currentYear.value = null
+    yearError.value = 'No s\'ha pogut carregar l\'exercici actual. Torna-ho a provar més tard.'
+  } finally {
+    loadingYear.value = false
+  }
+}
+
+const fetchCountAdultMembers = async () => {
+  loadingAdultMembers.value = true
+  adultMembersError.value = null
+
+  try {
+    const response = await api.get('members/count', {
+      params: {
+        where: {
+          isRegistered: true,
+          or: [
+            { categoryFk: 1 },
+            { categoryFk: 2 }
+          ]
+        }
+      }
+    })
+    totalAdultMembers.value = response.data.count
+  } catch (error) {
+    console.error('Error obtenint el nombre d\'adults:', error)
+    totalAdultMembers.value = null
+    adultMembersError.value = 'No s\'ha pogut carregar el nombre d\'adults. Torna-ho a provar més tard.'
+  } finally {
+    loadingAdultMembers.value = false
+  }
+}
+
+const fetchCountChildishMembers = async () => {
+  loadingChildishMembers.value = true
+  childishMembersError.value = null
+
+  try {
+    const response = await api.get('members/count', {
+      params: {
+        where: {
+          isRegistered: true,
+          or: [
+            { categoryFk: 3 },
+            { categoryFk: 4 },
+            { categoryFk: 5 }
+          ]
+        }
+      }
+    })
+    totalChildishMembers.value = response.data.count
+  } catch (error) {
+    console.error('Error obtenint el nombre de menors:', error)
+    totalChildishMembers.value = null
+    childishMembersError.value = 'No s\'ha pogut carregar el nombre de menors. Torna-ho a provar més tard.'
+  } finally {
+    loadingChildishMembers.value = false
+  }
+}
+
+onMounted(() => {
+  fetchCurrentYear()
+  fetchCountAdultMembers()
+  fetchCountChildishMembers()
+})
+
+const featuredYear = computed(() => {
+  if (currentYear.value === null) return null
+  return monuments.find(m => m.year === currentYear.value) ?? null
+})
+
+const hasNumbersError = computed(() => !!adultMembersError.value || !!childishMembersError.value)
+const isNumbersLoading = computed(() => loadingAdultMembers.value || loadingChildishMembers.value)
+
 const currentYearCargos = computed(() => {
-  const current = cargos.find(c => c.year === 2027)
+  if (currentYear.value === null) return []
+  const current = cargos.find(c => c.year === currentYear.value)
   if (!current) return []
   const mainRoles = ['President', 'Fallera Major', 'President Infantil', 'Fallera Major Infantil']
   return current.members.filter(m => mainRoles.includes(m.role))
 })
+
 const quickLinks = [
   { title: 'Història', desc: '60 anys de tradició', icon: 'history_edu', to: '/historia', color: 'primary' },
   { title: 'Monuments', desc: 'Les nostres falles', icon: 'architecture', to: '/monumentos', color: 'accent' },
@@ -36,10 +130,40 @@ const hasNoPhoto = (image: string) => image === '/no-photo.svg'
     <div ref="scrollRef" class="q-pa-md q-py-xl container">
       <!-- Featured Year -->
       <section class="q-mb-xl">
-        <div class="row justify-center">
+        <!-- Loading state -->
+        <div v-if="loadingYear" class="row justify-center q-pa-xl">
+          <q-spinner color="primary" size="48px" />
+        </div>
+
+        <!-- Error state -->
+        <div v-else-if="yearError" class="row justify-center q-pa-xl">
+          <div class="col-12 col-md-8 text-center">
+            <q-icon name="error_outline" color="negative" size="48px" class="q-mb-sm" />
+            <div class="text-subtitle1 text-negative text-weight-bold q-mb-sm">
+              {{ yearError }}
+            </div>
+            <q-btn
+              color="primary"
+              label="Tornar a intentar"
+              icon="refresh"
+              outline
+              @click="fetchCurrentYear"
+            />
+          </div>
+        </div>
+
+        <!-- No data for the fetched year -->
+        <div v-else-if="!featuredYear" class="row justify-center q-pa-xl">
+          <div class="col-12 col-md-8 text-center text-grey-7">
+            No s'han trobat dades de monuments per a l'any actual.
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div v-else class="row justify-center">
           <div class="col-12 col-md-10">
             <div class="text-h3 text-center q-mb-lg text-secondary text-weight-bold">
-              Falla {{ featuredYear.year }}
+              Exercici {{ featuredYear.year }}
             </div>
 
             <!-- Main Cargos Section -->
@@ -176,21 +300,41 @@ const hasNoPhoto = (image: string) => image === '/no-photo.svg'
       <section class="q-mb-xl q-pt-lg">
         <q-card class="bg-secondary text-white" flat>
           <q-card-section class="q-pa-xl">
-            <div class="row justify-center q-col-gutter-lg text-center">
+            <div v-if="isNumbersLoading" class="row justify-center q-pa-md">
+              <q-spinner color="primary" size="48px" />
+            </div>
+            <div v-else-if="hasNumbersError" class="row justify-center q-pa-md">
+              <div class="col-12 col-md-8 text-center">
+                <q-icon name="error_outline" color="negative" size="48px" class="q-mb-sm" />
+                <div class="text-subtitle1 text-negative text-weight-bold q-mb-sm">
+                  No s'han pogut carregar les dades de la secció d'estadístiques. Torna-ho a provar més tard.
+                </div>
+                <q-btn
+                  color="primary"
+                  label="Tornar a intentar"
+                  icon="refresh"
+                  outline
+                  @click="() => { fetchCountAdultMembers(); fetchCountChildishMembers() }"
+                />
+              </div>
+            </div>
+            <div v-else class="row justify-center q-col-gutter-lg text-center">
               <div class="col-6 col-md-3">
                 <div class="text-h2 text-primary text-weight-bold">60+</div>
                 <div class="text-subtitle1">Anys d'història</div>
               </div>
               <div class="col-6 col-md-3">
-                <div class="text-h2 text-primary text-weight-bold">478</div>
+                <div class="text-h2 text-primary text-weight-bold">
+                  {{ (totalAdultMembers ?? 0) + (totalChildishMembers ?? 0) }}
+                </div>
                 <div class="text-subtitle1">Membres</div>
               </div>
               <div class="col-6 col-md-3">
-                <div class="text-h2 text-primary text-weight-bold">391</div>
+                <div class="text-h2 text-primary text-weight-bold">{{ totalAdultMembers }}</div>
                 <div class="text-subtitle1">Membres comissió gran</div>
               </div>
               <div class="col-6 col-md-3">
-                <div class="text-h2 text-primary text-weight-bold">87</div>
+                <div class="text-h2 text-primary text-weight-bold">{{ totalChildishMembers }}</div>
                 <div class="text-subtitle1">Membres comissió infantil</div>
               </div>
             </div>
