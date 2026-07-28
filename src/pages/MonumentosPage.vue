@@ -93,7 +93,7 @@ const firstPrizeCount = computed(() =>
             <div class="row items-center">
               <q-avatar color="primary" text-color="white" icon="architecture" size="48px" class="q-mr-md" />
               <div>
-                <div class="text-h4 text-weight-bold text-secondary">{{ filteredMonuments.length * 2}}</div>
+                <div class="text-h4 text-weight-bold text-secondary">108</div>
                 <div class="text-body2 text-grey-7">monuments trobats</div>
               </div>
             </div>

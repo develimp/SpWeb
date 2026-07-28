@@ -33,9 +33,6 @@ const noPhoto = computed(() => {
         <div class="text-h5 text-white text-weight-bold">
           {{ props.monument.year }}
         </div>
-        <q-badge color="primary" class="text-subtitle2">
-          {{ props.monument.year === 2024 ? 'Actual' : `${props.monument.year}` }}
-        </q-badge>
       </div>
     </q-card-section>
 
