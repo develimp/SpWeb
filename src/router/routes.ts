@@ -7,7 +7,7 @@ const routes = [
       { path: 'historia', name: 'Historia', component: () => import('pages/HistoriaPage.vue') },
       { path: 'monumentos', name: 'Monumentos', component: () => import('pages/MonumentosPage.vue') },
       { path: 'cargos', name: 'Cargos', component: () => import('pages/CargosPage.vue') },
-      { path: 'eventos', name: 'Eventos', component: () => import('pages/EventosPage.vue') },
+      { path: 'eventos', name: 'Eventos', component: () => import('pages/EventPage.vue') },
       { path: 'galeria', name: 'Galeria', component: () => import('pages/GaleriaPage.vue') },
       { path: 'contacto', name: 'Contacto', component: () => import('pages/ContactoPage.vue') },
     ],

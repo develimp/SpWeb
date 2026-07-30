@@ -82,7 +82,7 @@ export const historia: Decade[] = [
     2011 - Amb els mateixos artistes, s'aconseguí el segon doblet consecutiu a la secció primera.
     2012 - Es va produir un notable augment del cens arribant als 355 membres, el que va permetre realitzar reformes i ampliar el casal de ferro.
     2013 - Es realitzà el canvi de casal a una nau a les afores del poble per evitar problemes amb el veïnat i poder desenvolupar millor les activitats de la comissió.
-    2015 - Es complí el 50 aniversari de la comissió i es realitzaren nombroses activitats per a celebrar-ho. Es va crear una web per a fer el seguiment de tot el que ocorregué durant l'any.
+    2016 - Es complí el 50 aniversari de la comissió i es realitzaren nombroses activitats per a celebrar-ho. Es va crear una web per a fer el seguiment de tot el que ocorregué durant l'any.
     2018 - Es tornà a pujar el monument infantil a la secció especial on encara es troba actualment.`,
     milestone: "Premis 2011",
     image: "/historia/premis 2011.webp"
