@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { events } from '@/data/events'
+import { ref, computed, onMounted } from 'vue'
+import { api } from 'boot/axios'
 import EventCard from '@/components/EventCard.vue'
+import type { Event } from '@/types/event'
+
+const events = ref<Event[]>([])
+const loadingEvents = ref(false)
+const eventsError = ref<string | null>(null)
 
 const selectedMonth = ref<string | null>(null)
 const selectedCategory = ref<string | null>(null)
@@ -22,13 +27,32 @@ const months = [
   { label: 'Desembre', value: '12' }
 ]
 
+const fetchEvents = async () => {
+  loadingEvents.value = true
+  eventsError.value = null
+  try {
+    const response = await api.get('/events')
+    events.value = response.data
+  } catch (error) {
+    console.error('Error obtenint els esdeveniments:', error)
+    events.value = []
+    eventsError.value = 'No s\'han pogut carregar els esdeveniments. Torna-ho a provar més tard.'
+  } finally {
+    loadingEvents.value = false
+  }
+}
+
+onMounted(() => {
+  fetchEvents()
+})
+
 const categories = computed(() => {
-  const catSet = new Set(events.map(e => e.category))
+  const catSet = new Set(events.value.map(e => e.category))
   return Array.from(catSet).map(cat => ({ label: cat, value: cat }))
 })
 
 const filteredEvents = computed(() => {
-  let result = [...events].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  let result = [...events.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   if (selectedMonth.value) {
     result = result.filter(e => e.date.substring(5, 7) === selectedMonth.value)
@@ -44,7 +68,7 @@ const filteredEvents = computed(() => {
 const categoryColors: Record<string, string> = {
   'Nomenament': 'primary',
   'Presentació': 'primary',
-  'Cremà': 'negative',
+  'Monument': 'negative',
   'Premi': 'accent',
   'Assemblea': 'positive',
   'Cultura': 'cyan',
@@ -55,6 +79,10 @@ const categoryColors: Record<string, string> = {
 
 function getCategoryColor(category: string): string {
   return categoryColors[category] || 'grey'
+}
+
+function formatTime(time: string | null): string {
+  return time ? time.substring(0, 5) : ''
 }
 </script>
 
@@ -154,56 +182,69 @@ function getCategoryColor(category: string): string {
         </div>
       </div>
 
-      <!-- Cards View -->
-      <div v-if="viewMode === 'cards'" class="row q-col-gutter-md">
-        <div
-          v-for="event in filteredEvents"
-          :key="event.id"
-          class="col-12 col-md-6"
-        >
-          <EventCard :event="event" />
+      <!-- Loading / Error -->
+      <div v-if="loadingEvents" class="text-center q-py-xl">
+        <q-spinner color="primary" size="48px" />
+        <div class="text-body2 text-grey-7 q-mt-sm">Carregant esdeveniments...</div>
+      </div>
+
+      <div v-else-if="eventsError" class="text-center q-py-xl">
+        <q-icon name="error_outline" color="negative" size="48px" class="q-mb-md" />
+        <div class="text-body2 text-negative">{{ eventsError }}</div>
+      </div>
+
+      <template v-else>
+        <!-- Cards View -->
+        <div v-if="viewMode === 'cards'" class="row q-col-gutter-md">
+          <div
+            v-for="event in filteredEvents"
+            :key="event.id"
+            class="col-12 col-md-6"
+          >
+            <EventCard :event="event" />
+          </div>
         </div>
-      </div>
 
-      <!-- List View -->
-      <q-list v-else-if="viewMode === 'list'" bordered separator class="rounded-borders">
-        <q-item v-for="event in filteredEvents" :key="event.id" class="q-py-md">
-          <q-item-section avatar>
-            <q-avatar
-              :color="getCategoryColor(event.category)"
-              text-color="white"
-              :icon="event.category === 'Cremà' ? 'local_fire_department' : event.category === 'Plantà' ? 'construction' : 'event'"
-            />
-          </q-item-section>
+        <!-- List View -->
+        <q-list v-else-if="viewMode === 'list'" bordered separator class="rounded-borders">
+          <q-item v-for="event in filteredEvents" :key="event.id" class="q-py-md">
+            <q-item-section avatar>
+              <q-avatar
+                :color="getCategoryColor(event.category)"
+                text-color="white"
+                :icon="event.category === 'Cremà' ? 'local_fire_department' : event.category === 'Plantà' ? 'construction' : 'event'"
+              />
+            </q-item-section>
 
-          <q-item-section>
-            <q-item-label class="text-weight-bold text-subtitle1">{{ event.title }}</q-item-label>
-            <q-item-label caption>{{ event.description }}</q-item-label>
-            <q-item-label caption class="q-mt-xs">
-              <q-icon name="place" size="xs" class="q-mr-xs" />
-              {{ event.location }} · <q-icon name="schedule" size="xs" class="q-ml-sm q-mr-xs" />
-              {{ event.time }}
-            </q-item-label>
-          </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-weight-bold text-subtitle1">{{ event.title }}</q-item-label>
+              <q-item-label caption>{{ event.description }}</q-item-label>
+              <q-item-label caption class="q-mt-xs">
+                <q-icon name="place" size="xs" class="q-mr-xs" />
+                {{ event.location }} · <q-icon name="schedule" size="xs" class="q-ml-sm q-mr-xs" />
+                {{ formatTime(event.time) }}
+              </q-item-label>
+            </q-item-section>
 
-          <q-item-section side>
-            <div class="text-right">
-              <div class="text-h5 text-weight-bold text-secondary">
-                {{ new Date(event.date).getDate() }}
+            <q-item-section side>
+              <div class="text-right">
+                <div class="text-h5 text-weight-bold text-secondary">
+                  {{ new Date(event.date).getUTCDate() }}
+                </div>
+                <div class="text-caption text-grey-7">
+                  {{ new Date(event.date).toLocaleDateString('ca-ES', { month: 'short', timeZone: 'UTC' }) }}
+                </div>
               </div>
-              <div class="text-caption text-grey-7">
-                {{ new Date(event.date).toLocaleDateString('ca-ES', { month: 'short' }) }}
-              </div>
-            </div>
-          </q-item-section>
-        </q-item>
-      </q-list>
+            </q-item-section>
+          </q-item>
+        </q-list>
 
-      <div v-if="filteredEvents.length === 0" class="text-center q-py-xl">
-        <q-icon name="event_busy" color="grey" size="64px" class="q-mb-md" />
-        <div class="text-h6 text-grey-7">No s'han trobat esdeveniments</div>
-        <div class="text-body2 text-grey-6">Prova de canviar els filtres</div>
-      </div>
+        <div v-if="filteredEvents.length === 0" class="text-center q-py-xl">
+          <q-icon name="event_busy" color="grey" size="64px" class="q-mb-md" />
+          <div class="text-h6 text-grey-7">No s'han trobat esdeveniments</div>
+          <div class="text-body2 text-grey-6">Prova de canviar els filtres</div>
+        </div>
+      </template>
     </div>
   </q-page>
 </template>

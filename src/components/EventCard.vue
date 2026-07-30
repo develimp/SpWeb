@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Event } from '@/data/events'
+import type { Event } from '@/types/event'
 
 defineProps<{
   event: Event
@@ -36,6 +36,10 @@ const categoryIcons: Record<string, string> = {
 function getCategoryIcon(category: string): string {
   return categoryIcons[category] || 'event'
 }
+
+function formatTime(time: string | null): string {
+  return time ? time.substring(0, 5) : ''
+}
 </script>
 
 <template>
@@ -43,9 +47,9 @@ function getCategoryIcon(category: string): string {
     <q-card-section class="q-pa-none">
       <div class="row">
         <div class="col-auto q-pa-md text-white text-center" :class="`bg-${getCategoryColor(event.category)}`" style="width: 100px;">
-          <div class="text-h4 text-weight-bold">{{ new Date(event.date).getDate() }}</div>
+          <div class="text-h4 text-weight-bold">{{ new Date(event.date).getUTCDate() }}</div>
           <div class="text-caption">
-            {{ new Date(event.date).toLocaleDateString('ca-ES', { month: 'short' }) }}
+            {{ new Date(event.date).toLocaleDateString('ca-ES', { month: 'short', timeZone: 'UTC' }) }}
           </div>
         </div>
 
@@ -67,7 +71,7 @@ function getCategoryIcon(category: string): string {
           <div class="row items-center q-gutter-md">
             <div class="text-caption text-grey-7">
               <q-icon name="schedule" class="q-mr-xs" size="xs" />
-              {{ event.time }}
+              {{ formatTime(event.time) }}
             </div>
             <div class="text-caption text-grey-7">
               <q-icon name="place" class="q-mr-xs" size="xs" />
