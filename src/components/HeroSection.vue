@@ -46,7 +46,7 @@ onMounted(() => {
                 text-color="black"
                 label="La nostra història"
                 icon="arrow_forward"
-                to="/historia"
+                to="/history"
                 size="lg"
                 unelevated
                 class="btn-primary"

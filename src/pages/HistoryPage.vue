@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { historia } from '@/data/historia'
+import { history } from 'src/data/history'
 import TimelineItem from '@/components/TimelineItem.vue'
 
 const activeDecade = ref<string | null>(null)
 
-const decades = computed(() => historia.map(h => h.decade))
+const decades = computed(() => history.map(h => h.decade))
 
 const scrollToDecade = (decade: string) => {
   activeDecade.value = decade
@@ -56,7 +56,7 @@ const scrollToDecade = (decade: string) => {
       <div class="col-12 col-md-9">
         <q-timeline color="primary">
           <div
-            v-for="(decade, index) in historia"
+            v-for="(decade, index) in history"
             :id="`decade-${decade.decade}`"
             :key="decade.decade"
             class="timeline-section"

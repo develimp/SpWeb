@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Decade } from '@/data/historia'
+import type { Decade } from 'src/data/history'
 
 defineProps<{
   decade: Decade

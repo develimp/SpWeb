@@ -7,7 +7,7 @@ export interface Decade {
   image: string
 }
 
-export const historia: Decade[] = [
+export const history: Decade[] = [
   {
     decade: "1960s",
     years: "1965–1969",
@@ -17,7 +17,7 @@ export const historia: Decade[] = [
     1968 - Canvi d'ubicació del monument de Tetuan - Felip II a Cardenal Vera amb Felipe II.
     1969 - Primer premi de la història de la falla amb el monument "Olimpiades de la vida" de Salvador Soria Soler.`,
     milestone: "Fundació 1965",
-    image: "/historia/fundacio 1965.webp"
+    image: "https://spweb-storage.ams3.cdn.digitaloceanspaces.com/history/fundacio-1965.webp"
   },
   {
     decade: "1970s",
@@ -29,7 +29,7 @@ export const historia: Decade[] = [
     1978 - Per primera vegada des de la seua fundació, la comissió deixà de plantar falla per l'escàs nombre de membres.
     1979 - La comissió pren força i, per primera vegada, formà part de la secció especial.`,
     milestone: "Comissió infantil 1971",
-    image: "/historia/infantils 1971.webp"
+    image: "https://spweb-storage.ams3.cdn.digitaloceanspaces.com/history/infantils-1971.webp"
   },
   {
     decade: "1980s",
@@ -44,7 +44,7 @@ export const historia: Decade[] = [
     L'ajuntament ens va concedir el casal del carrer Felip II per a celebrar reunions, muntar les oficines i preparar menjars.
     1988 - No es plantaren monuments a la ciutat degut a la riuada del 4 d'octubre de 1987.`,
     milestone: "Segon premi infantil 1984",
-    image: "/historia/segon premi infantil 1984.webp"
+    image: "https://spweb-storage.ams3.cdn.digitaloceanspaces.com/history/segon-premi-infantil-1984.webp"
   },
   {
     decade: "1990s",
@@ -57,7 +57,7 @@ export const historia: Decade[] = [
     1995 - La comissió guanya el que a dia d'avui és el seu últim primer premi de la secció especial gran amb el monument elaborat per Juanjo Armengol.
     1996 - Naix el grup de teatre de la falla de la mà d'Enric Ferrús, qui també fou l'autor i director de l'obra teatral "L'hort del Sord del Quartero".`,
     milestone: "Presentació 1994",
-    image: "/historia/presentacio 1994.webp"
+    image: "https://spweb-storage.ams3.cdn.digitaloceanspaces.com/history/presentacio-1994.webp"
   },
   {
     decade: "2000s",
@@ -71,7 +71,7 @@ export const historia: Decade[] = [
     2005 - S'estrenà un nou estendard i el 5 de març es va fer l'acte de benedicció del mateix amb la participació dels seus patrocinadors, Encarna Vidal i Bernat Santapau.
     Es creà el grup de teatre infantil de la falla.`,
     milestone: "Benedicció estendard 2005",
-    image: "/historia/benediccio estendard 2005.webp"
+    image: "https://spweb-storage.ams3.cdn.digitaloceanspaces.com/history/benediccio-estendard-2005.webp"
   },
   {
     decade: "2010s",
@@ -85,7 +85,7 @@ export const historia: Decade[] = [
     2016 - Es complí el 50 aniversari de la comissió i es realitzaren nombroses activitats per a celebrar-ho. Es va crear una web per a fer el seguiment de tot el que ocorregué durant l'any.
     2018 - Es tornà a pujar el monument infantil a la secció especial on encara es troba actualment.`,
     milestone: "Premis 2011",
-    image: "/historia/premis 2011.webp"
+    image: "https://spweb-storage.ams3.cdn.digitaloceanspaces.com/history/premis-2011.webp"
   },
   {
     decade: "2020s",
@@ -97,6 +97,6 @@ export const historia: Decade[] = [
     2023 - S'aconseguí per primera vegada en la nova etapa en especial, el primer premi al monument infantil de la mà de l'artiste Gonzalo Rojas
     2025 - Es creà per primera vegada una gestora al no presentar-se cap faller al càrrec de president de la comissió`,
     milestone: "Cremà infantil 2023",
-    image: "/historia/crema infantil 2023.webp"
+    image: "https://spweb-storage.ams3.cdn.digitaloceanspaces.com/history/crema-infantil-2023.webp"
   }
 ]

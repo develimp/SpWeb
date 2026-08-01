@@ -43,7 +43,7 @@ const currentYear = new Date().getFullYear()
         <span class="q-px-sm text-grey-8">·</span>
         <router-link to="/galeria" class="text-primary">Galeria</router-link>
         <span class="q-px-sm text-grey-8">·</span>
-        <router-link to="/historia" class="text-primary">Historia</router-link>
+        <router-link to="/history" class="text-primary">Història</router-link>
       </div>
     </div>
   </footer>

@@ -6,7 +6,7 @@ const scrolled = ref(false)
 
 const navLinks = [
   { to: '/', label: 'Inici', icon: 'home' },
-  { to: '/historia', label: 'Història', icon: 'history' },
+  { to: '/history', label: 'Història', icon: 'history' },
   { to: '/monumentos', label: 'Monuments', icon: 'architecture' },
   { to: '/cargos', label: 'Càrrecs', icon: 'groups' },
   { to: '/eventos', label: 'Esdeveniments', icon: 'event' },

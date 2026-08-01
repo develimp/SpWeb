@@ -106,7 +106,7 @@ const currentYearCargos = computed(() => {
 })
 
 const quickLinks = [
-  { title: 'Història', desc: '60 anys de tradició', icon: 'history_edu', to: '/historia', color: 'primary' },
+  { title: 'Història', desc: '60 anys de tradició', icon: 'history_edu', to: '/history', color: 'primary' },
   { title: 'Monuments', desc: 'Les nostres falles', icon: 'architecture', to: '/monumentos', color: 'accent' },
   { title: 'Càrrecs', desc: 'La nostra família fallera', icon: 'groups', to: '/cargos', color: 'secondary' },
   { title: 'Esdeveniments', desc: 'El calendari festiu', icon: 'event', to: '/eventos', color: 'info' },
