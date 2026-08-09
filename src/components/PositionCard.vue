@@ -1,27 +1,34 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { YearCargos, CargoMember } from '@/data/cargos'
+import type { Position } from '@/types/position'
 
 defineProps<{
-  yearCargos: YearCargos
+  yearPositions: {
+    year: number
+    members: Position[]
+  }
   isLatest?: boolean
 }>()
 
-const selectedMember = ref<CargoMember | null>(null)
+const selectedMember = ref<Position | null>(null)
 const dialogOpen = ref(false)
 
-function openPhoto(member: CargoMember) {
+function getImageUrl(imageKey: string | null | undefined) {
+  return imageKey && imageKey.trim() ? imageKey : '/no-photo.svg'
+}
+
+function openPhoto(member: Position) {
   selectedMember.value = member
   dialogOpen.value = true
 }
 </script>
 
 <template>
-  <q-card class="cargo-card" flat bordered>
+  <q-card class="position-card" flat bordered>
     <q-card-section class="bg-secondary q-py-sm">
       <div class="row justify-between items-center">
         <div class="text-h5 text-white text-weight-bold">
-          {{ yearCargos.year }}
+          {{ yearPositions.year }}
         </div>
         <q-badge v-if="isLatest" color="primary" class="text-subtitle2">
           Any actual
@@ -31,13 +38,13 @@ function openPhoto(member: CargoMember) {
 
     <q-card-section class="q-gutter-md">
       <div
-        v-for="member in yearCargos.members"
+        v-for="member in yearPositions.members"
         :key="member.name + member.role"
-        class="cargo-member row items-center no-wrap cursor-pointer"
+        class="position-member row items-center no-wrap cursor-pointer"
         @click="openPhoto(member)"
       >
         <q-avatar size="56px" class="q-mr-md">
-          <img :src="member.image" :alt="member.name" style="object-fit: cover; width: 100%; height: 100%;">
+          <img :src="getImageUrl(member.imageKey)" :alt="member.name" style="object-fit: cover; width: 100%; height: 100%;">
         </q-avatar>
 
         <div class="col">
@@ -56,7 +63,7 @@ function openPhoto(member: CargoMember) {
     <q-card style="width: 75vw; max-width: 800px; max-height: 75vh;">
       <q-img
         v-if="selectedMember"
-        :src="selectedMember.image"
+        :src="getImageUrl(selectedMember.imageKey)"
         contain
         style="min-height: 50vh;"
       />
@@ -70,7 +77,7 @@ function openPhoto(member: CargoMember) {
 </template>
 
 <style lang="scss" scoped>
-.cargo-card {
+.position-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
@@ -79,7 +86,7 @@ function openPhoto(member: CargoMember) {
   }
 }
 
-.cargo-member {
+.position-member {
   padding: 0.75rem;
   border-radius: 8px;
   transition: background-color 0.2s ease;

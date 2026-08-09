@@ -3,7 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { api } from 'boot/axios'
 import HeroSection from '@/components/HeroSection.vue'
 import { monuments } from '@/data/monuments'
-import { cargos } from '@/data/cargos'
+import type { Position } from '@/types/position'
 
 const currentYear = ref<number | null>(null)
 const loadingYear = ref(true)
@@ -14,6 +14,13 @@ const adultMembersError = ref<string | null>(null)
 const totalChildishMembers = ref<number | null>(null)
 const loadingChildishMembers = ref(true)
 const childishMembersError = ref<string | null>(null)
+const positions = ref<Position[]>([])
+const loadingPositions = ref(false)
+const positionsError = ref<string | null>(null)
+
+function getImageUrl(imageKey: string | null | undefined) {
+  return imageKey && imageKey.trim() ? imageKey : '/no-photo.svg'
+}
 
 const fetchCurrentYear = async () => {
   loadingYear.value = true
@@ -83,10 +90,26 @@ const fetchCountChildishMembers = async () => {
   }
 }
 
+const fetchPositions = async () => {
+  loadingPositions.value = true
+  positionsError.value = null
+  try {
+    const response = await api.get('/positions')
+    positions.value = response.data
+  } catch (error) {
+    console.error('Error obtenint els càrrecs:', error)
+    positions.value = []
+    positionsError.value = 'No s\'han pogut carregar els càrrecs. Torna-ho a provar més tard.'
+  } finally {
+    loadingPositions.value = false
+  }
+}
+
 onMounted(() => {
   fetchCurrentYear()
   fetchCountAdultMembers()
   fetchCountChildishMembers()
+  fetchPositions()
 })
 
 const featuredYear = computed(() => {
@@ -97,19 +120,18 @@ const featuredYear = computed(() => {
 const hasNumbersError = computed(() => !!adultMembersError.value || !!childishMembersError.value)
 const isNumbersLoading = computed(() => loadingAdultMembers.value || loadingChildishMembers.value)
 
-const currentYearCargos = computed(() => {
+const currentYearPositions = computed(() => {
   if (currentYear.value === null) return []
-  const current = cargos.find(c => c.year === currentYear.value)
-  if (!current) return []
-  const mainRoles = ['President', 'Fallera Major', 'President Infantil', 'Fallera Major Infantil']
-  return current.members.filter(m => mainRoles.includes(m.role))
+  return positions.value
+    .filter(position => position.fallaYear === currentYear.value)
+    .filter(position => ['President', 'Fallera Major', 'President Infantil', 'Fallera Major Infantil'].includes(position.role))
 })
 
 const quickLinks = [
   { title: 'Història', desc: '60 anys de tradició', icon: 'history_edu', to: '/history', color: 'primary' },
   { title: 'Monuments', desc: 'Les nostres falles', icon: 'architecture', to: '/monumentos', color: 'accent' },
-  { title: 'Càrrecs', desc: 'La nostra família fallera', icon: 'groups', to: '/cargos', color: 'secondary' },
-  { title: 'Esdeveniments', desc: 'El calendari festiu', icon: 'event', to: '/eventos', color: 'info' },
+  { title: 'Càrrecs', desc: 'La nostra família fallera', icon: 'groups', to: '/positions', color: 'secondary' },
+  { title: 'Esdeveniments', desc: 'El calendari festiu', icon: 'event', to: '/events', color: 'info' },
   { title: 'Galeria', desc: 'Moments inoblidables', icon: 'photo_library', to: '/galeria', color: 'positive' },
   { title: 'Contacte', desc: 'Uneix-te a nosaltres', icon: 'mail', to: '/contacto', color: 'warning' }
 ]
@@ -166,26 +188,26 @@ const hasNoPhoto = (image: string) => image === '/no-photo.svg'
               Exercici {{ featuredYear.year }}
             </div>
 
-            <!-- Main Cargos Section -->
+            <!-- Main Positions Section -->
             <div class="q-mb-xl">
               <div class="text-h5 text-center q-mb-md text-grey-8 text-weight-bold">
                 Els nostres representants
               </div>
               <div class="row q-col-gutter-md">
                 <div
-                  v-for="cargo in currentYearCargos"
-                  :key="cargo.name"
+                  v-for="position in currentYearPositions"
+                  :key="position.name"
                   class="col-12 col-sm-6 col-md-3"
                 >
-                  <router-link to="/cargos" class="text-decoration-none">
-                    <q-card flat bordered class="cargo-card full-height">
-                      <q-img :src="cargo.image" :ratio="1" />
+                  <router-link to="/positions" class="text-decoration-none">
+                    <q-card flat bordered class="position-card full-height">
+                      <q-img :src="getImageUrl(position.imageKey)" :ratio="1" />
                       <q-card-section class="text-center">
                         <div class="text-h6 text-weight-bold text-secondary q-mb-xs">
-                          {{ cargo.role }}
+                          {{ position.role }}
                         </div>
                         <div class="text-body2 text-grey-8">
-                          {{ cargo.name }}
+                          {{ position.name }}
                         </div>
                       </q-card-section>
                     </q-card>
@@ -383,7 +405,7 @@ const hasNoPhoto = (image: string) => image === '/no-photo.svg'
   }
 }
 
-.cargo-card {
+.position-card {
   transition: all 0.3s ease;
   cursor: pointer;
 

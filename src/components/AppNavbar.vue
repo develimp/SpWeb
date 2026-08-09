@@ -8,8 +8,8 @@ const navLinks = [
   { to: '/', label: 'Inici', icon: 'home' },
   { to: '/history', label: 'Història', icon: 'history' },
   { to: '/monumentos', label: 'Monuments', icon: 'architecture' },
-  { to: '/cargos', label: 'Càrrecs', icon: 'groups' },
-  { to: '/eventos', label: 'Esdeveniments', icon: 'event' },
+  { to: '/positions', label: 'Càrrecs', icon: 'groups' },
+  { to: '/events', label: 'Esdeveniments', icon: 'event' },
   { to: '/galeria', label: 'Galeria', icon: 'photo_library' }
 ]
 
