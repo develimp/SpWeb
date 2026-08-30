@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Position } from '@/types/position'
+import { resolveImageUrl } from '@/utils/imagePlaceholders'
 
 defineProps<{
   yearPositions: {
@@ -14,7 +15,7 @@ const selectedMember = ref<Position | null>(null)
 const dialogOpen = ref(false)
 
 function getImageUrl(imageKey: string | null | undefined) {
-  return imageKey && imageKey.trim() ? imageKey : '/no-photo.svg'
+  return resolveImageUrl(imageKey)
 }
 
 function openPhoto(member: Position) {
