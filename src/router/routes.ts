@@ -5,7 +5,7 @@ const routes = [
     children: [
       { path: '', name: 'Home', component: () => import('pages/HomePage.vue') },
       { path: 'history', name: 'History', component: () => import('pages/HistoryPage.vue') },
-      { path: 'monumentos', name: 'Monumentos', component: () => import('pages/MonumentosPage.vue') },
+      { path: 'monuments', name: 'Monuments', component: () => import('pages/MonumentPage.vue') },
       { path: 'positions', name: 'Càrrecs', component: () => import('pages/PositionPage.vue') },
       { path: 'events', name: 'Esdeveniments', component: () => import('pages/EventPage.vue') },
       { path: 'galeria', name: 'Galeria', component: () => import('pages/GaleriaPage.vue') },
