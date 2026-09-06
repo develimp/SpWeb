@@ -33,7 +33,7 @@ export default defineConfig((/* ctx */) => {
         node: 'node20',
       },
 
-      vueRouterMode: 'history', // available values: 'hash', 'history'
+      vueRouterMode: 'hash', // available values: 'hash', 'history'
 
       extendViteConf(viteConf) {
         viteConf.resolve = viteConf.resolve || {}
