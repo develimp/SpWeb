@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import type { GalleryImage } from '@/data/gallery'
+import type { GalleryImage } from '@/types/gallery'
 
 const props = defineProps<{
   images: GalleryImage[]

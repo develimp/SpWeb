@@ -1,41 +1,110 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { galleryAlbums } from '@/data/gallery'
+import { ref, computed, onMounted } from 'vue'
+import { api } from 'boot/axios'
 import PhotoGallery from '@/components/PhotoGallery.vue'
+import type { GalleryAlbum, GalleryAlbumView } from '@/types/gallery'
+import { resolveImageUrl, STORAGE_BASE_URL } from '@/utils/imagePlaceholders'
 
+const galleryAlbums = ref<GalleryAlbumView[]>([])
+const loadingAlbums = ref(false)
+const albumsError = ref<string | null>(null)
 const selectedYear = ref<number | null>(null)
 const selectedCategory = ref<string | null>(null)
-const expandedAlbums = ref<Set<string>>(new Set())
+const expandedAlbums = ref<Set<number>>(new Set())
+
+const getImageUrl = (album: GalleryAlbum, imageKey: string | null | undefined) => {
+  const trimmedImageKey = imageKey?.trim()
+  return trimmedImageKey
+    ? `${STORAGE_BASE_URL}/gallery/${album.fallaYear}/${trimmedImageKey}`
+    : resolveImageUrl(imageKey)
+}
+
+const mapAlbum = (
+  album: GalleryAlbum,
+  photos: GalleryAlbum['photos'],
+  albumIndex: number,
+): GalleryAlbumView => ({
+  ...album,
+  id: album.id ?? albumIndex,
+  photos: (photos ?? []).map((photo, photoIndex) => ({
+    id: photo.id ?? photoIndex,
+    src: getImageUrl(album, photo.imageKey),
+    title: '',
+  })),
+})
+
+const fetchGalleryAlbums = async () => {
+  loadingAlbums.value = true
+  albumsError.value = null
+
+  try {
+    const albumsResponse = await api.get<GalleryAlbum[]>('/gallery-albums')
+    const albumsWithPhotos = await Promise.all(
+      albumsResponse.data.map(async (album, albumIndex) => {
+        if (album.id === undefined) {
+          return mapAlbum(album, [], albumIndex)
+        }
+
+        const photosResponse = await api.get<NonNullable<GalleryAlbum['photos']>>(
+          '/gallery-photos',
+          {
+            params: {
+              filter: JSON.stringify({
+                where: { albumFk: album.id },
+              }),
+            },
+          },
+        )
+        return mapAlbum(album, photosResponse.data, albumIndex)
+      }),
+    )
+
+    galleryAlbums.value = albumsWithPhotos
+  } catch (error) {
+    console.error('Error obtenint la galeria:', error)
+    galleryAlbums.value = []
+    albumsError.value = 'No s\'han pogut carregar les imatges. Torna-ho a provar més tard.'
+  } finally {
+    loadingAlbums.value = false
+  }
+}
+
+onMounted(() => {
+  fetchGalleryAlbums()
+})
 
 const years = computed(() => {
-  const yearSet = new Set(galleryAlbums.map(album => album.year))
+  const yearSet = new Set(galleryAlbums.value.map(album => album.fallaYear))
   return Array.from(yearSet).sort((a, b) => b - a)
 })
 
 const categories = computed(() => {
-  const catSet = new Set(galleryAlbums.map(album => album.category))
+  const catSet = new Set(galleryAlbums.value.map(album => album.category))
   return Array.from(catSet).sort()
 })
 
 const filteredAlbums = computed(() => {
-  let result = [...galleryAlbums]
+  let result = [...galleryAlbums.value]
 
   if (selectedYear.value) {
-    result = result.filter(album => album.year === selectedYear.value)
+    result = result.filter(album => album.fallaYear === selectedYear.value)
   }
 
   if (selectedCategory.value) {
     result = result.filter(album => album.category === selectedCategory.value)
   }
 
-  return result.sort((a, b) => b.year - a.year)
+  return result.sort((a, b) => {
+    const dateDifference = new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime()
+    return dateDifference || b.fallaYear - a.fallaYear
+  })
 })
 
 const totalPhotos = computed(() => {
-  return filteredAlbums.value.reduce((sum, album) => sum + album.photos.length, 0)
+  return filteredAlbums.value.reduce((sum, album) => sum + (album.photos?.length ?? 0), 0)
 })
 
-const toggleAlbum = (albumId: string) => {
+const toggleAlbum = (albumId: number) => {
   if (expandedAlbums.value.has(albumId)) {
     expandedAlbums.value.delete(albumId)
   } else {
@@ -43,8 +112,14 @@ const toggleAlbum = (albumId: string) => {
   }
 }
 
-const isAlbumExpanded = (albumId: string) => {
+const isAlbumExpanded = (albumId: number) => {
   return expandedAlbums.value.has(albumId)
+}
+
+const formatDate = (date: string | null | undefined) => {
+  if (!date) return ''
+  const [year, month, day] = date.substring(0, 10).split('-')
+  return `${day}/${month}/${year}`
 }
 
 const categoryColors: Record<string, string> = {
@@ -166,7 +241,15 @@ const getCategoryColor = (category: string) => {
       <q-separator class="q-my-lg" />
 
       <!-- Albums -->
-      <div v-if="filteredAlbums.length > 0" class="q-gutter-md">
+      <div v-if="loadingAlbums" class="text-center q-py-xl">
+        <q-spinner color="primary" size="48px" />
+      </div>
+
+      <div v-else-if="albumsError" class="text-center q-py-xl text-grey-7">
+        {{ albumsError }}
+      </div>
+
+      <div v-else-if="filteredAlbums.length > 0" class="q-gutter-md">
         <div v-for="album in filteredAlbums" :key="album.id" class="album-card">
           <q-card flat bordered class="album-header" @click="toggleAlbum(album.id)">
             <q-card-section class="row items-center justify-between cursor-pointer q-pa-md">
@@ -180,7 +263,9 @@ const getCategoryColor = (category: string) => {
                 <div>
                   <div class="text-h6 text-weight-bold" :class="`text-${getCategoryColor(album.category)}`">{{ album.category }}</div>
                   <div class="text-caption text-grey-7">
-                    {{ album.year }}<span v-if="album.description"> · {{ album.description }}</span>
+                    {{ album.fallaYear }}
+                    <span v-if="album.date"> · {{ formatDate(album.date) }}</span>
+                    <span v-if="album.description"> · {{ album.description }}</span>
                   </div>
                 </div>
               </div>

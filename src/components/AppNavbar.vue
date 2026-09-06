@@ -10,7 +10,7 @@ const navLinks = [
   { to: '/monuments', label: 'Monuments', icon: 'architecture' },
   { to: '/positions', label: 'Càrrecs', icon: 'groups' },
   { to: '/events', label: 'Esdeveniments', icon: 'event' },
-  { to: '/galeria', label: 'Galeria', icon: 'photo_library' }
+  { to: '/gallery', label: 'Galeria', icon: 'photo_library' }
 ]
 
 const handleScroll = () => {
@@ -65,7 +65,7 @@ onUnmounted(() => {
         color="primary"
         label="Uneix-te"
         class="q-ml-md gt-sm"
-        to="/contacto"
+        to="/contact"
       />
     </q-toolbar>
   </q-header>
@@ -108,7 +108,7 @@ onUnmounted(() => {
         color="primary"
         label="Uneix-te"
         class="full-width"
-        to="/contacto"
+        to="/contact"
         @click="leftDrawer = false"
       />
     </div>

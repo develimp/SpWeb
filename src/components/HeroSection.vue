@@ -56,7 +56,7 @@ onMounted(() => {
                 text-color="white"
                 label="Esdeveniments"
                 icon="event"
-                to="/eventos"
+                to="/events"
                 size="lg"
                 unelevated
                 class="btn-secondary"

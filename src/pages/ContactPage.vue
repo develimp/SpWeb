@@ -203,7 +203,7 @@ const onSubmit = () => {
 
       <section class="text-center q-py-xl">
         <div class="text-h5 text-weight-bold text-secondary q-mb-md">
-          Vols fer-te soci de la Falla Sants Patrons?
+          Vols fer-te membre de la Falla Sants Patrons?
         </div>
         <div class="text-body1 text-grey-8 q-mb-md" style="max-width: 600px; margin: 0 auto;">
           Uneix-te a una de les falles amb més història d'Alzira, viu de prop la tradició
