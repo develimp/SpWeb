@@ -81,7 +81,7 @@ const scrollToDecade = (decade: string) => {
           color="primary"
           label="Veure galeria"
           icon="photo_library"
-          to="/galeria"
+          to="/gallery"
           size="lg"
           unelevated
         />

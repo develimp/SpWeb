@@ -229,14 +229,14 @@ const quickLinks = [
     title: 'Galeria',
     desc: 'Moments inoblidables',
     icon: 'photo_library',
-    to: '/galeria',
+    to: '/gallery',
     color: 'positive',
   },
   {
     title: 'Contacte',
     desc: 'Uneix-te a nosaltres',
     icon: 'mail',
-    to: '/contacto',
+    to: '/contact',
     color: 'warning',
   },
 ]
@@ -531,7 +531,7 @@ const scrollToContent = () => {
           color="primary"
           label="Contacta'ns"
           icon="mail"
-          to="/contacto"
+          to="/contact"
           size="lg"
           unelevated
           class="q-mt-md"

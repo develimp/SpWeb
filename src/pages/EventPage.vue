@@ -32,7 +32,8 @@ const fetchEvents = async () => {
   eventsError.value = null
   try {
     const response = await api.get('/events')
-    events.value = response.data
+    const today = new Date().toISOString().substring(0, 10)
+    events.value = response.data.filter((event: Event) => event.date.substring(0, 10) >= today)
   } catch (error) {
     console.error('Error obtenint els esdeveniments:', error)
     events.value = []

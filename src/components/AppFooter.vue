@@ -39,9 +39,9 @@ const currentYear = new Date().getFullYear()
         {{ currentYear }} © Falla Sants Patrons</div>
 
       <div class="text-grey text-caption q-mt-xs">
-        <router-link to="/contacto" class="text-primary">Contacte</router-link>
+        <router-link to="/contact" class="text-primary">Contacte</router-link>
         <span class="q-px-sm text-grey-8">·</span>
-        <router-link to="/galeria" class="text-primary">Galeria</router-link>
+        <router-link to="/gallery" class="text-primary">Galeria</router-link>
         <span class="q-px-sm text-grey-8">·</span>
         <router-link to="/history" class="text-primary">Història</router-link>
       </div>
