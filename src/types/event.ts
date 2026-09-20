@@ -6,4 +6,5 @@ export interface Event {
   location: string | null
   category: string
   description: string
+  imageKey?: string | null
 }

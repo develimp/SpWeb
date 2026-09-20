@@ -87,9 +87,8 @@ export default {
 .hero-section {
   position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 680px;
-  overflow: hidden;
+  min-height: 100svh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -245,7 +244,9 @@ export default {
 
 @media (max-width: 720px) {
   .hero-section {
-    min-height: 760px;
+    min-height: 100svh;
+    padding: 3rem 0 5rem;
+    box-sizing: border-box;
   }
 
   .hero-content {
