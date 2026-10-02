@@ -58,25 +58,22 @@ const prevImage = () => {
           class="absolute-top-right q-ma-md z-top"
         />
 
-        <div class="dialog-content row items-center justify-center">
+        <div class="dialog-content">
           <q-btn
             round
             flat
             icon="navigate_before"
             color="white"
             size="lg"
-            class="q-mx-md"
+            class="nav-button nav-button-prev"
             @click="prevImage"
           />
 
-          <div class="image-wrapper flex flex-center">
-            <q-img
-              :src="imageList[selectedImageIndex].src"
-              :alt="imageList[selectedImageIndex].title"
-              fit="contain"
-              class="modal-image"
-            />
-          </div>
+          <img
+            :src="imageList[selectedImageIndex].src"
+            :alt="imageList[selectedImageIndex].title"
+            class="modal-image"
+          />
 
           <q-btn
             round
@@ -84,7 +81,7 @@ const prevImage = () => {
             icon="navigate_next"
             color="white"
             size="lg"
-            class="q-mx-md"
+            class="nav-button nav-button-next"
             @click="nextImage"
           />
         </div>
@@ -142,28 +139,41 @@ const prevImage = () => {
 
 .image-dialog {
   .dialog-card {
-    width: min(92vw, 1100px);
-    max-width: 1100px;
-    max-height: 90vh;
-    border-radius: 12px;
+    width: auto;
+    min-width: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
     overflow: hidden;
   }
 }
 
 .dialog-content {
-  min-height: 70vh;
-  padding: 24px 16px 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.image-wrapper {
-  flex: 1;
-  min-width: 0;
-  height: 100%;
+.nav-button {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-button-prev {
+  left: 8px;
+}
+
+.nav-button-next {
+  right: 8px;
 }
 
 .modal-image {
-  max-width: 100%;
-  max-height: 70vh;
+  display: block;
+  max-width: 100vw;
+  max-height: 100vh;
   object-fit: contain;
 }
 </style>
