@@ -7,4 +7,5 @@ export interface Event {
   category: string
   description: string
   imageKey?: string | null
+  fallaYear: number
 }

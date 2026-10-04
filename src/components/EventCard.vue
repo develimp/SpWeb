@@ -9,9 +9,14 @@ defineProps<{
 
 const showImage = ref(false)
 
-function getImageUrl(imageKey: string | null | undefined): string | undefined {
+function getImageUrl(
+  fallaYear: number,
+  imageKey: string | null | undefined,
+): string | undefined {
   const trimmedImageKey = imageKey?.trim()
-  return trimmedImageKey ? `${STORAGE_BASE_URL}/events/${trimmedImageKey}` : undefined
+  return trimmedImageKey
+    ? `${STORAGE_BASE_URL}/events/${fallaYear}/${trimmedImageKey}`
+    : undefined
 }
 
 const categoryColors: Record<string, string> = {
@@ -56,7 +61,7 @@ function formatTime(time: string | null): string {
     <q-card-section class="q-pa-none">
       <div
         class="row event-row"
-        :class="{ 'has-event-image': getImageUrl(event.imageKey) }"
+        :class="{ 'has-event-image': getImageUrl(event.fallaYear, event.imageKey) }"
       >
         <div class="col-auto q-pa-md text-white text-center" :class="`bg-${getCategoryColor(event.category)}`" style="width: 100px;">
           <div class="text-h4 text-weight-bold">{{ new Date(event.date).getUTCDate() }}</div>
@@ -92,9 +97,9 @@ function formatTime(time: string | null): string {
           </div>
         </div>
 
-        <div v-if="getImageUrl(event.imageKey)" class="event-image-column">
+        <div v-if="getImageUrl(event.fallaYear, event.imageKey)" class="event-image-column">
           <q-img
-            :src="getImageUrl(event.imageKey)"
+            :src="getImageUrl(event.fallaYear, event.imageKey)"
             :alt="`Poster de ${event.title}`"
             class="event-image cursor-pointer"
             fit="contain"
@@ -111,8 +116,8 @@ function formatTime(time: string | null): string {
   <q-dialog v-model="showImage">
     <q-card class="image-dialog-card">
       <q-img
-        v-if="getImageUrl(event.imageKey)"
-        :src="getImageUrl(event.imageKey)"
+        v-if="getImageUrl(event.fallaYear, event.imageKey)"
+        :src="getImageUrl(event.fallaYear, event.imageKey)"
         :alt="`Poster de ${event.title}`"
         fit="contain"
         class="expanded-event-image"
