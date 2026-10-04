@@ -7,9 +7,12 @@ import type { Event } from '@/types/event'
 const events = ref<Event[]>([])
 const loadingEvents = ref(false)
 const eventsError = ref<string | null>(null)
+const today = ref(new Date().toISOString().substring(0, 10))
 
 const selectedMonth = ref<string | null>(null)
 const selectedCategory = ref<string | null>(null)
+const selectedPastYear = ref<number | null>(null)
+const selectedPastCategory = ref<string | null>(null)
 const viewMode = ref<'cards' | 'list'>('cards')
 
 const months = [
@@ -31,9 +34,9 @@ const fetchEvents = async () => {
   loadingEvents.value = true
   eventsError.value = null
   try {
-    const response = await api.get('/events')
-    const today = new Date().toISOString().substring(0, 10)
-    events.value = response.data.filter((event: Event) => event.date.substring(0, 10) >= today)
+    const response = await api.get<Event[]>('/events')
+    today.value = new Date().toISOString().substring(0, 10)
+    events.value = response.data
   } catch (error) {
     console.error('Error obtenint els esdeveniments:', error)
     events.value = []
@@ -48,12 +51,32 @@ onMounted(() => {
 })
 
 const categories = computed(() => {
-  const catSet = new Set(events.value.map(e => e.category))
+  const catSet = new Set(upcomingEvents.value.map(e => e.category))
   return Array.from(catSet).map(cat => ({ label: cat, value: cat }))
 })
 
+const pastCategories = computed(() => {
+  const catSet = new Set(pastEvents.value.map(e => e.category))
+  return Array.from(catSet).map(cat => ({ label: cat, value: cat }))
+})
+
+const pastFallaYears = computed(() => {
+  const yearSet = new Set(pastEvents.value.map(event => event.fallaYear))
+  return Array.from(yearSet)
+    .sort((a, b) => b - a)
+    .map(year => ({ label: String(year), value: year }))
+})
+
+const upcomingEvents = computed(() =>
+  events.value.filter(event => event.date.substring(0, 10) >= today.value),
+)
+
+const pastEvents = computed(() =>
+  events.value.filter(event => event.date.substring(0, 10) < today.value),
+)
+
 const filteredEvents = computed(() => {
-  let result = [...events.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  let result = [...upcomingEvents.value].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   if (selectedMonth.value) {
     result = result.filter(e => e.date.substring(5, 7) === selectedMonth.value)
@@ -61,6 +84,20 @@ const filteredEvents = computed(() => {
 
   if (selectedCategory.value) {
     result = result.filter(e => e.category === selectedCategory.value)
+  }
+
+  return result
+})
+
+const filteredPastEvents = computed(() => {
+  let result = [...pastEvents.value].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+  if (selectedPastYear.value) {
+    result = result.filter(event => event.fallaYear === selectedPastYear.value)
+  }
+
+  if (selectedPastCategory.value) {
+    result = result.filter(event => event.category === selectedPastCategory.value)
   }
 
   return result
@@ -245,6 +282,129 @@ function formatTime(time: string | null): string {
           <div class="text-h6 text-grey-7">No s'han trobat esdeveniments</div>
           <div class="text-body2 text-grey-6">Prova de canviar els filtres</div>
         </div>
+
+        <section class="q-mt-xl">
+          <div class="row justify-between items-center q-mb-lg">
+            <div class="text-h5 text-weight-bold text-secondary">
+              <q-icon name="history" color="primary" class="q-mr-sm" />
+              Esdeveniments passats
+            </div>
+          </div>
+
+          <div class="row q-col-gutter-md q-mb-lg">
+            <div class="col-12 col-md-4">
+              <q-select
+                v-model="selectedPastYear"
+                :options="pastFallaYears"
+                label="Filtra per exercici"
+                outlined
+                dense
+                clearable
+                emit-value
+                map-options
+                color="primary"
+                class="full-width"
+              >
+                <template #prepend>
+                  <q-icon name="calendar_month" />
+                </template>
+              </q-select>
+            </div>
+            <div class="col-12 col-md-4">
+              <q-select
+                v-model="selectedPastCategory"
+                :options="pastCategories"
+                label="Filtra per categoria"
+                outlined
+                dense
+                clearable
+                emit-value
+                map-options
+                color="primary"
+                class="full-width"
+              >
+                <template #prepend>
+                  <q-icon name="category" />
+                </template>
+              </q-select>
+            </div>
+            <div class="col-12 col-md-4">
+              <q-btn
+                v-if="selectedPastYear || selectedPastCategory"
+                flat
+                color="primary"
+                label="Netejar filtres"
+                icon="filter_alt_off"
+                class="full-width"
+                @click="selectedPastYear = null; selectedPastCategory = null"
+              />
+            </div>
+          </div>
+
+          <div class="q-mb-lg">
+            <div class="text-subtitle2 text-grey-8 q-mb-sm">Categories:</div>
+            <div class="row q-gutter-sm">
+              <q-badge
+                v-for="cat in pastCategories"
+                :key="cat.value"
+                :color="getCategoryColor(cat.value)"
+                class="text-caption cursor-pointer"
+                @click="selectedPastCategory = selectedPastCategory === cat.value ? null : cat.value"
+              >
+                {{ cat.label }}
+              </q-badge>
+            </div>
+          </div>
+
+          <div v-if="viewMode === 'cards'" class="row q-col-gutter-md">
+            <div
+              v-for="event in filteredPastEvents"
+              :key="event.id"
+              class="col-12 col-md-6"
+            >
+              <EventCard :event="event" />
+            </div>
+          </div>
+
+          <q-list v-else-if="viewMode === 'list'" bordered separator class="rounded-borders">
+            <q-item v-for="event in filteredPastEvents" :key="event.id" class="q-py-md">
+              <q-item-section avatar>
+                <q-avatar
+                  :color="getCategoryColor(event.category)"
+                  text-color="white"
+                  :icon="event.category === 'Cremà' ? 'local_fire_department' : event.category === 'Plantà' ? 'construction' : 'event'"
+                />
+              </q-item-section>
+
+              <q-item-section>
+                <q-item-label class="text-weight-bold text-subtitle1">{{ event.title }}</q-item-label>
+                <q-item-label caption>{{ event.description }}</q-item-label>
+                <q-item-label caption class="q-mt-xs">
+                  <q-icon name="place" size="xs" class="q-mr-xs" />
+                  {{ event.location }} · <q-icon name="schedule" size="xs" class="q-ml-sm q-mr-xs" />
+                  {{ formatTime(event.time) }}
+                </q-item-label>
+              </q-item-section>
+
+              <q-item-section side>
+                <div class="text-right">
+                  <div class="text-h5 text-weight-bold text-secondary">
+                    {{ new Date(event.date).getUTCDate() }}
+                  </div>
+                  <div class="text-caption text-grey-7">
+                    {{ new Date(event.date).toLocaleDateString('ca-ES', { month: 'short', timeZone: 'UTC' }) }}
+                  </div>
+                </div>
+              </q-item-section>
+            </q-item>
+          </q-list>
+
+          <div v-if="filteredPastEvents.length === 0" class="text-center q-py-xl">
+            <q-icon name="event_busy" color="grey" size="64px" class="q-mb-md" />
+            <div class="text-h6 text-grey-7">No s'han trobat esdeveniments passats</div>
+            <div class="text-body2 text-grey-6">Prova de canviar els filtres</div>
+          </div>
+        </section>
       </template>
     </div>
   </q-page>
