@@ -10,7 +10,7 @@ const loadingAlbums = ref(false)
 const albumsError = ref<string | null>(null)
 const selectedYear = ref<number | null>(null)
 const selectedCategory = ref<string | null>(null)
-const expandedAlbums = ref<Set<number>>(new Set())
+const expandedAlbums = ref<Record<number, boolean>>({})
 
 const getImageUrl = (album: GalleryAlbum, imageKey: string | null | undefined) => {
   const trimmedImageKey = imageKey?.trim()
@@ -104,16 +104,15 @@ const totalPhotos = computed(() => {
   return filteredAlbums.value.reduce((sum, album) => sum + (album.photos?.length ?? 0), 0)
 })
 
-const toggleAlbum = (albumId: number) => {
-  if (expandedAlbums.value.has(albumId)) {
-    expandedAlbums.value.delete(albumId)
-  } else {
-    expandedAlbums.value.add(albumId)
+const setAlbumExpanded = (albumId: number, isExpanded: boolean) => {
+  expandedAlbums.value = {
+    ...expandedAlbums.value,
+    [albumId]: isExpanded,
   }
 }
 
 const isAlbumExpanded = (albumId: number) => {
-  return expandedAlbums.value.has(albumId)
+  return !!expandedAlbums.value[albumId]
 }
 
 const formatDate = (date: string | null | undefined) => {
@@ -251,42 +250,44 @@ const getCategoryColor = (category: string) => {
 
       <div v-else-if="filteredAlbums.length > 0" class="q-gutter-md">
         <div v-for="album in filteredAlbums" :key="album.id" class="album-card">
-          <q-card flat bordered class="album-header" @click="toggleAlbum(album.id)">
-            <q-card-section class="row items-center justify-between cursor-pointer q-pa-md">
-              <div class="row items-center">
-                <q-icon
-                  :name="isAlbumExpanded(album.id) ? 'expand_less' : 'expand_more'"
-                  :color="getCategoryColor(album.category)"
-                  size="28px"
-                  class="q-mr-md"
-                />
-                <div>
-                  <div class="text-h6 text-weight-bold" :class="`text-${getCategoryColor(album.category)}`">{{ album.category }}</div>
-                  <div class="text-caption text-grey-7">
-                    {{ album.fallaYear }}
-                    <span v-if="album.date"> · {{ formatDate(album.date) }}</span>
-                    <span v-if="album.description"> · {{ album.description }}</span>
+          <q-expansion-item
+            :model-value="isAlbumExpanded(album.id)"
+            @update:model-value="setAlbumExpanded(album.id, $event)"
+            expand-separator
+            class="album-expand-item"
+          >
+            <template #header>
+              <div class="row items-center justify-between full-width q-pr-sm">
+                <div class="row items-center">
+                  <q-icon
+                    :name="isAlbumExpanded(album.id) ? 'expand_less' : 'expand_more'"
+                    :color="getCategoryColor(album.category)"
+                    size="28px"
+                    class="q-mr-md"
+                  />
+                  <div>
+                    <div class="text-h6 text-weight-bold" :class="`text-${getCategoryColor(album.category)}`">{{ album.category }}</div>
+                    <div class="text-caption text-grey-7">
+                      {{ album.fallaYear }}
+                      <span v-if="album.date"> · {{ formatDate(album.date) }}</span>
+                      <span v-if="album.description"> · {{ album.description }}</span>
+                    </div>
                   </div>
                 </div>
+                <div class="text-right">
+                  <q-badge :color="getCategoryColor(album.category)" class="text-caption">
+                    {{ album.photos.length }} foto{{ album.photos.length !== 1 ? 's' : '' }}
+                  </q-badge>
+                </div>
               </div>
-              <div class="text-right">
-                <q-badge :color="getCategoryColor(album.category)" class="text-caption">
-                  {{ album.photos.length }} foto{{ album.photos.length !== 1 ? 's' : '' }}
-                </q-badge>
-              </div>
-            </q-card-section>
-          </q-card>
+            </template>
 
-          <q-expand-item
-            :model-value="isAlbumExpanded(album.id)"
-            @update:model-value="toggleAlbum(album.id)"
-          >
             <q-card flat bordered class="q-mt-sm">
               <q-card-section>
                 <PhotoGallery :images="album.photos" />
               </q-card-section>
             </q-card>
-          </q-expand-item>
+          </q-expansion-item>
         </div>
       </div>
 
