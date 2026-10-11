@@ -114,10 +114,10 @@ const fetchPositions = async () => {
     const response = await api.get('/positions')
     positions.value = response.data
   } catch (error) {
-        console.error('Error obtenint els càrrecs:', error)
+        console.error('Error obtenint els representants:', error)
     positions.value = []
     positionsError.value =
-         'No s\'han pogut carregar els càrrecs. Torna-ho a provar més tard.'
+         'No s\'han pogut carregar els representants. Torna-ho a provar més tard.'
   } finally {
     loadingPositions.value = false
   }
@@ -184,16 +184,25 @@ const isNumbersLoading = computed(
 
 const currentYearPositions = computed(() => {
   if (currentYear.value === null) return []
+
+  const roleOrder: Record<string, number> = {
+    'Fallera Major': 0,
+    President: 1,
+    'Fallera Major Infantil': 2,
+    'President Infantil': 3,
+  }
+
   return positions.value
     .filter((position) => position.fallaYear === currentYear.value)
-    .filter((position) =>
-      [
-        'President',
-        'Fallera Major',
-        'President Infantil',
-        'Fallera Major Infantil',
-      ].includes(position.role),
-    )
+    .filter((position) => Object.keys(roleOrder).includes(position.role))
+    .sort((a, b) => {
+      const orderA = roleOrder[a.role] ?? Number.MAX_SAFE_INTEGER
+      const orderB = roleOrder[b.role] ?? Number.MAX_SAFE_INTEGER
+      if (orderA !== orderB) {
+        return orderA - orderB
+      }
+      return a.name.localeCompare(b.name)
+    })
 })
 
 const quickLinks = [
@@ -212,7 +221,7 @@ const quickLinks = [
     color: 'accent',
   },
   {
-    title: 'Càrrecs',
+    title: 'Representants',
     desc: 'La nostra família fallera',
     icon: 'groups',
     to: '/positions',

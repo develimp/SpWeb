@@ -10,6 +10,13 @@ type YearPositions = {
   members: Position[]
 }
 
+const roleOrder: Record<string, number> = {
+  'Fallera Major': 0,
+  President: 1,
+  'Fallera Major Infantil': 2,
+  'President Infantil': 3,
+}
+
 const positions = ref<Position[]>([])
 const loadingPositions = ref(false)
 const positionsError = ref<string | null>(null)
@@ -25,9 +32,9 @@ const fetchPositions = async () => {
     const response = await api.get('/positions')
     positions.value = response.data
   } catch (error) {
-    console.error('Error obtenint els càrrecs:', error)
+    console.error('Error obtenint els representants:', error)
     positions.value = []
-    positionsError.value = 'No s\'han pogut carregar els càrrecs. Torna-ho a provar més tard.'
+    positionsError.value = 'No s\'han pogut carregar els representants. Torna-ho a provar més tard.'
   } finally {
     loadingPositions.value = false
   }
@@ -46,7 +53,14 @@ const groupedPositions = computed<YearPositions[]>(() => {
   return Object.entries(groups)
     .map(([year, members]) => ({
       year: Number(year),
-      members
+      members: [...members].sort((a, b) => {
+        const orderA = roleOrder[a.role] ?? Number.MAX_SAFE_INTEGER
+        const orderB = roleOrder[b.role] ?? Number.MAX_SAFE_INTEGER
+        if (orderA !== orderB) {
+          return orderA - orderB
+        }
+        return a.name.localeCompare(b.name)
+      }),
     }))
     .sort((a, b) => b.year - a.year)
 })
@@ -99,7 +113,7 @@ onMounted(() => {
   <q-page>
     <section class="hero-small text-white q-py-xl">
       <div class="container text-center">
-        <div class="text-h3 text-primary text-weight-bold q-mb-md">Els Càrrecs</div>
+        <div class="text-h3 text-primary text-weight-bold q-mb-md">Els Representants</div>
         <div class="text-h5 text-grey-8 q-mb-sm">La nostra família fallera</div>
         <div class="text-subtitle1 text-grey-7">Els màxims representants de cada exercici</div>
       </div>
@@ -119,7 +133,7 @@ onMounted(() => {
         <div v-else class="text-center q-pa-xl">
           <q-spinner v-if="loadingPositions" color="primary" size="48px" />
           <div v-else-if="positionsError" class="text-grey-7">{{ positionsError }}</div>
-          <div v-else class="text-grey-7">No hi ha dades de càrrecs disponibles.</div>
+          <div v-else class="text-grey-7">No hi ha dades de representants disponibles.</div>
         </div>
       </section>
 
@@ -199,7 +213,7 @@ onMounted(() => {
         class="text-center q-py-xl"
       >
         <q-icon name="search_off" color="grey" size="64px" class="q-mb-md" />
-        <div class="text-h6 text-grey-7">No s'han trobat càrrecs</div>
+        <div class="text-h6 text-grey-7">No s'han trobat representants</div>
         <div class="text-body2 text-grey-6">Prova de canviar els filtres</div>
       </div>
     </div>

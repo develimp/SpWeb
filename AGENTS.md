@@ -20,7 +20,7 @@ No test framework is configured.
 - **sass-embedded crash**: Vite is forced to use pure-JS sass via `api: 'legacy'` in quasar.config.js. Do not change this.
 - **Path aliases**: `@/`, `src/`, `components/`, `pages/`, `layouts/`, `data/`, `boot/`, `css/`, `router/` all resolve to `src/` subdirectories.
 - **Data is static**: All content (history, cargos, monuments, gallery) lives in `src/data/*.ts` as hardcoded TypeScript arrays — no backend API is used for these.
-- **Public dir is gitignored**: Images in `public/` (càrrecs, galeria, historia, monuments) are not tracked. The `no-photo.svg` placeholder is referenced in data files.
+- **Public dir is gitignored**: Images in `public/` are not tracked.
 - **Fonts**: Oswald (headings) and Nunito (body) loaded from Google Fonts in index.html.
 - **Color scheme**: Primary `#E8621A` (orange), Secondary `#111111` (dark), Accent `#D4A017` (gold). Defined in both CSS custom properties and Quasar SCSS variables.
 
