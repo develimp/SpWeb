@@ -175,6 +175,28 @@ const featuredYear = computed(() => {
   }
 })
 
+const monumentDialogOpen = ref(false)
+const selectedMonumentType = ref<'gran' | 'infantil'>('gran')
+
+const dialogMonument = computed(() =>
+  selectedMonumentType.value === 'gran'
+    ? featuredYear.value?.gran
+    : featuredYear.value?.infantil,
+)
+
+const openMonumentDialog = (type: 'gran' | 'infantil') => {
+  selectedMonumentType.value = type
+  monumentDialogOpen.value = true
+}
+
+const positionDialogOpen = ref(false)
+const selectedPosition = ref<Position | null>(null)
+
+const openPositionDialog = (position: Position) => {
+  selectedPosition.value = position
+  positionDialogOpen.value = true
+}
+
 const hasNumbersError = computed(
   () => !!adultMembersError.value || !!childishMembersError.value,
 )
@@ -320,22 +342,35 @@ const scrollToContent = () => {
                   :key="position.name"
                   class="col-12 col-sm-6 col-md-3"
                 >
-                  <router-link to="/positions" class="text-decoration-none">
-                    <q-card flat bordered class="position-card full-height">
-                      <q-img :src="getPositionImageUrl(position.imageKey)" :ratio="1" />
-                      <q-card-section class="text-center">
-                        <div
-                          class="text-h6 text-weight-bold text-secondary q-mb-xs"
-                        >
-                          {{ position.role }}
-                        </div>
-                        <div class="text-body2 text-grey-8">
-                          {{ position.name }}
-                        </div>
-                      </q-card-section>
-                    </q-card>
-                  </router-link>
+                  <q-card flat bordered class="position-card full-height">
+                    <q-img
+                      :src="getPositionImageUrl(position.imageKey)"
+                      :ratio="1"
+                      class="cursor-pointer"
+                      @click="openPositionDialog(position)"
+                    />
+                    <q-card-section class="text-center">
+                      <div
+                        class="text-h6 text-weight-bold text-secondary q-mb-xs"
+                      >
+                        {{ position.role }}
+                      </div>
+                      <div class="text-body2 text-grey-8">
+                        {{ position.name }}
+                      </div>
+                    </q-card-section>
+                  </q-card>
                 </div>
+              </div>
+
+              <div class="text-center q-mt-md">
+                <q-btn
+                  flat
+                  color="primary"
+                  label="Veure tots els representants"
+                  icon="arrow_forward"
+                  to="/positions"
+                />
               </div>
             </div>
 
@@ -348,7 +383,13 @@ const scrollToContent = () => {
             <div class="row q-col-gutter-lg">
               <div class="col-12 col-md-6">
                 <q-card flat bordered class="featured-monument full-height">
-                  <q-img :src="featuredYear.gran.image" :ratio="16 / 9">
+                  <q-img
+                    :src="featuredYear.gran.image"
+                    :ratio="16 / 9"
+                    fit="contain"
+                    class="monument-image cursor-pointer"
+                    @click="openMonumentDialog('gran')"
+                  >
                     <div v-if="featuredYear.gran.title" class="absolute-bottom bg-secondary">
                       <div class="text-subtitle1 text-weight-bold">
                         Monument Gran
@@ -371,21 +412,19 @@ const scrollToContent = () => {
                     <p class="text-body2 text-grey-8 q-mb-none">
                       {{ featuredYear.gran.description }}
                     </p>
-                    <q-btn
-                      flat
-                      color="primary"
-                      label="Veure tots els monuments"
-                      icon="arrow_forward"
-                      to="/monuments"
-                      class="q-mt-md"
-                    />
                   </q-card-section>
                 </q-card>
               </div>
 
               <div class="col-12 col-md-6">
                 <q-card flat bordered class="featured-monument full-height">
-                  <q-img :src="featuredYear.infantil.image" :ratio="16 / 9">
+                  <q-img
+                    :src="featuredYear.infantil.image"
+                    :ratio="16 / 9"
+                    fit="contain"
+                    class="monument-image cursor-pointer"
+                    @click="openMonumentDialog('infantil')"
+                  >
                     <div v-if="featuredYear.infantil.title" class="absolute-bottom bg-secondary">
                       <div class="text-subtitle1 text-weight-bold">
                         Monument Infantil
@@ -408,17 +447,19 @@ const scrollToContent = () => {
                     <p class="text-body2 text-grey-8 q-mb-none">
                       {{ featuredYear.infantil.description }}
                     </p>
-                    <q-btn
-                      flat
-                      color="primary"
-                      label="Veure tots els monuments"
-                      icon="arrow_forward"
-                      to="/monuments"
-                      class="q-mt-md"
-                    />
                   </q-card-section>
                 </q-card>
               </div>
+            </div>
+
+            <div class="text-center q-mt-md">
+              <q-btn
+                flat
+                color="primary"
+                label="Veure tots els monuments"
+                icon="arrow_forward"
+                to="/monuments"
+              />
             </div>
           </div>
         </div>
@@ -547,6 +588,71 @@ const scrollToContent = () => {
         />
       </section>
     </div>
+
+    <q-dialog v-model="monumentDialogOpen">
+      <q-card
+        style="
+          width: 85vw;
+          max-width: 1000px;
+          max-height: 85vh;
+          background: #000;
+        "
+      >
+        <q-img
+          :src="dialogMonument?.image"
+          fit="contain"
+          class="monument-image"
+          style="min-height: 60vh"
+        />
+        <q-card-section class="bg-secondary text-white">
+          <div class="text-h6">
+            {{
+              selectedMonumentType === 'gran'
+                ? 'Monument Gran'
+                : 'Monument Infantil'
+            }}
+          </div>
+          <div class="text-subtitle1">{{ dialogMonument?.title }}</div>
+          <div class="text-subtitle2">{{ dialogMonument?.artist }}</div>
+        </q-card-section>
+        <q-btn
+          v-close-popup
+          round
+          color="primary"
+          icon="close"
+          class="absolute-top-right q-ma-md"
+        />
+      </q-card>
+    </q-dialog>
+
+    <q-dialog v-model="positionDialogOpen">
+      <q-card
+        style="
+          width: 85vw;
+          max-width: 1000px;
+          max-height: 85vh;
+          background: #000;
+        "
+      >
+        <q-img
+          :src="getPositionImageUrl(selectedPosition?.imageKey)"
+          fit="contain"
+          class="monument-image"
+          style="min-height: 60vh"
+        />
+        <q-card-section class="bg-secondary text-white">
+          <div class="text-h6">{{ selectedPosition?.role }}</div>
+          <div class="text-subtitle1">{{ selectedPosition?.name }}</div>
+        </q-card-section>
+        <q-btn
+          v-close-popup
+          round
+          color="primary"
+          icon="close"
+          class="absolute-top-right q-ma-md"
+        />
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -569,6 +675,18 @@ const scrollToContent = () => {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
   }
+}
+
+.monument-image {
+  background: #000;
+
+  :deep(.q-img__image) {
+    transform: scale(1.002);
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .position-card {
