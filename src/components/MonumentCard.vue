@@ -81,7 +81,8 @@ const getAwardLabel = (monument: MonumentView['gran']) => {
         <q-img
           :src="getImageUrl(props.monument.gran, 'gran')"
           :ratio="3 / 2"
-          class="rounded-borders cursor-pointer"
+          fit="contain"
+          class="rounded-borders monument-image cursor-pointer"
           @click="dialogOpen = true"
         >
           <div v-if="props.monument.gran?.title" class="absolute-bottom text-white">
@@ -116,7 +117,8 @@ const getAwardLabel = (monument: MonumentView['gran']) => {
         <q-img
           :src="getImageUrl(props.monument.infantil, 'infantil')"
           :ratio="3 / 2"
-          class="rounded-borders cursor-pointer"
+          fit="contain"
+          class="rounded-borders monument-image cursor-pointer"
           @click="dialogOpen = true"
         >
           <div v-if="props.monument.infantil?.title" class="absolute-bottom text-white">
@@ -150,8 +152,13 @@ const getAwardLabel = (monument: MonumentView['gran']) => {
   </q-card>
 
   <q-dialog v-model="dialogOpen">
-    <q-card style="width: 85vw; max-width: 1000px; max-height: 85vh">
-      <q-img :src="currentImage" contain style="min-height: 60vh" />
+    <q-card style="width: 85vw; max-width: 1000px; max-height: 85vh; background: #000">
+      <q-img
+        :src="currentImage"
+        fit="contain"
+        class="monument-image"
+        style="min-height: 60vh"
+      />
       <q-card-section class="bg-secondary text-white">
         <div class="text-h6">{{ currentTitle }}</div>
         <div class="text-subtitle2">{{ currentArtist }}</div>
@@ -181,5 +188,13 @@ const getAwardLabel = (monument: MonumentView['gran']) => {
 
 .rounded-borders {
   border-radius: 8px;
+}
+
+.monument-image {
+  background: #000;
+
+  :deep(.q-img__image) {
+    transform: scale(1.002);
+  }
 }
 </style>
