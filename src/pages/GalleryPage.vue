@@ -112,7 +112,9 @@ const setAlbumExpanded = (albumId: number, isExpanded: boolean) => {
 }
 
 const isAlbumExpanded = (albumId: number) => {
-  return !!expandedAlbums.value[albumId]
+  const explicitState = expandedAlbums.value[albumId]
+  if (explicitState !== undefined) return explicitState
+  return filteredAlbums.value[0]?.id === albumId
 }
 
 const formatDate = (date: string | null | undefined) => {

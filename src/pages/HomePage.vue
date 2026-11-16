@@ -389,27 +389,26 @@ const scrollToContent = () => {
                     fit="contain"
                     class="monument-image cursor-pointer"
                     @click="openMonumentDialog('gran')"
-                  >
-                    <div v-if="featuredYear.gran.title" class="absolute-bottom bg-secondary">
-                      <div class="text-subtitle1 text-weight-bold">
-                        Monument Gran
-                      </div>
-                      <div class="text-h5 text-primary q-mt-xs">
-                        {{ featuredYear.gran.title }}
-                      </div>
-                    </div>
-                  </q-img>
+                  />
                   <q-card-section>
-                    <div class="row items-center q-gutter-sm q-mb-sm">
-                      <q-icon name="person" color="primary" />
-                      <span class="text-body2">{{
-                        featuredYear.gran.artist
-                      }}</span>
+                    <div class="text-caption text-grey-7 q-mb-xs">
+                      Monument Gran
                     </div>
-                    <q-badge color="accent" class="q-mb-md">
+                    <div
+                      v-if="featuredYear.gran.title"
+                      class="text-subtitle2 text-weight-bold text-primary q-mb-xs"
+                    >
+                      {{ featuredYear.gran.title }}
+                    </div>
+                    <div class="text-caption text-grey-8">
+                      <q-icon name="person" class="q-mr-xs" />{{
+                        featuredYear.gran.artist
+                      }}
+                    </div>
+                    <q-badge color="accent" class="q-mt-sm">
                       {{ featuredYear.gran.award }}
                     </q-badge>
-                    <p class="text-body2 text-grey-8 q-mb-none">
+                    <p class="text-body2 text-grey-9 q-mt-sm">
                       {{ featuredYear.gran.description }}
                     </p>
                   </q-card-section>
@@ -424,27 +423,26 @@ const scrollToContent = () => {
                     fit="contain"
                     class="monument-image cursor-pointer"
                     @click="openMonumentDialog('infantil')"
-                  >
-                    <div v-if="featuredYear.infantil.title" class="absolute-bottom bg-secondary">
-                      <div class="text-subtitle1 text-weight-bold">
-                        Monument Infantil
-                      </div>
-                      <div class="text-h5 text-primary q-mt-xs">
-                        {{ featuredYear.infantil.title }}
-                      </div>
-                    </div>
-                  </q-img>
+                  />
                   <q-card-section>
-                    <div class="row items-center q-gutter-sm q-mb-sm">
-                      <q-icon name="person" color="primary" />
-                      <span class="text-body2">{{
-                        featuredYear.infantil.artist
-                      }}</span>
+                    <div class="text-caption text-grey-7 q-mb-xs">
+                      Monument Infantil
                     </div>
-                    <q-badge color="accent" class="q-mb-md">
+                    <div
+                      v-if="featuredYear.infantil.title"
+                      class="text-subtitle2 text-weight-bold text-primary q-mb-xs"
+                    >
+                      {{ featuredYear.infantil.title }}
+                    </div>
+                    <div class="text-caption text-grey-8">
+                      <q-icon name="person" class="q-mr-xs" />{{
+                        featuredYear.infantil.artist
+                      }}
+                    </div>
+                    <q-badge color="accent" class="q-mt-sm">
                       {{ featuredYear.infantil.award }}
                     </q-badge>
-                    <p class="text-body2 text-grey-8 q-mb-none">
+                    <p class="text-body2 text-grey-9 q-mt-sm">
                       {{ featuredYear.infantil.description }}
                     </p>
                   </q-card-section>

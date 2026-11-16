@@ -84,13 +84,7 @@ const getAwardLabel = (monument: MonumentView['gran']) => {
           fit="contain"
           class="rounded-borders monument-image cursor-pointer"
           @click="dialogOpen = true"
-        >
-          <div v-if="props.monument.gran?.title" class="absolute-bottom text-white">
-            <div class="text-subtitle1 text-weight-bold">
-              {{ props.monument.gran?.title }}
-            </div>
-          </div>
-        </q-img>
+        />
 
         <div class="q-mt-md">
           <div class="text-subtitle2 text-weight-bold text-primary q-mb-xs">
@@ -120,13 +114,7 @@ const getAwardLabel = (monument: MonumentView['gran']) => {
           fit="contain"
           class="rounded-borders monument-image cursor-pointer"
           @click="dialogOpen = true"
-        >
-          <div v-if="props.monument.infantil?.title" class="absolute-bottom text-white">
-            <div class="text-subtitle1 text-weight-bold">
-              {{ props.monument.infantil?.title }}
-            </div>
-          </div>
-        </q-img>
+        />
 
         <div class="q-mt-md">
           <div class="text-subtitle2 text-weight-bold text-primary q-mb-xs">
